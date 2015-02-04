@@ -8,10 +8,9 @@
 
 import UIKit
 
-var progress: CGFloat = 1
+var progress: CGFloat = 8
 
 class ProgressView: UIView {
-    
     
 //    var propertyChangedListener : (CGFloat, CGFloat) -> Void = {
 //        println("The value of progress has changed from \($0) to \($1)")
@@ -28,8 +27,7 @@ class ProgressView: UIView {
     let polyPosition1 = 340 + (-progress * 36)
     let polyPosition2 = 362 + (-progress * 36)
     
-    // Only override drawRect: if you perform custom drawing.
-    // An empty implementation adversely affects performance during animation.
+    
     override func drawRect(rect: CGRect) {
 
         //// Color Declarations
@@ -50,22 +48,6 @@ class ProgressView: UIView {
         let rectanglePath = UIBezierPath(rect: CGRectMake(0, rectPosition, 400, 362))
         color.setFill()
         rectanglePath.fill()
-        
-        /// animation
-        
-//        func moveProgress(view: ProgressView){
-//            var toPoint: CGPoint = CGPointMake(0.0, 320.0)
-//            var fromPoint : CGPoint = CGPointMake(0.0, 0.0)
-//            
-//            var movement = CABasicAnimation(keyPath: "movement")
-//            movement.additive = true
-//            movement.fromValue =  NSValue(CGPoint: fromPoint)
-//            movement.toValue =  NSValue(CGPoint: toPoint)
-//            movement.duration = 0.3
-//            
-//            view.layer.addAnimation(movement, forKey: "move")
-//        }
-        
         
         
     }
