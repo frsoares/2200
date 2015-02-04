@@ -62,10 +62,11 @@ class StepCounter {
     let statQuery = HKStatisticsQuery(quantityType: idSteps, quantitySamplePredicate: mostRecentPredicate, options: HKStatisticsOptions.CumulativeSum, completionHandler: {(_,statistics,_) -> Void in
       if (statistics != nil) {
         
-        var source : HKSource = statistics.sources.first as HKSource
-        println("Number of sources: \(statistics.sources.count)")
         if let quantity : HKQuantity! = statistics.sumQuantity(){
-          self.stepCount = Int(quantity.doubleValueForUnit(HKUnit(fromString: "count")));
+            if let q = quantity {
+                var unit = HKUnit(fromString: "count")
+                self.stepCount = Int(q.doubleValueForUnit(unit));
+            }
         }
         
       }
