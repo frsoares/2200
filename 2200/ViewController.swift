@@ -9,14 +9,12 @@
 import UIKit
 
 class ViewController: UIViewController {
-    
+        
     var kgArray = ["81","82","83","84","85"]
     
     var greenColor = UIColor(red: CGFloat(84.0/255.0), green: CGFloat(174.0/255.0), blue: CGFloat(58.0/255.0), alpha: CGFloat(1.0))
     
     @IBOutlet weak var weightPicker: UIPickerView!
-    
-    @IBOutlet weak var configTable: UITableView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
