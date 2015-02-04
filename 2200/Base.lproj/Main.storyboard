@@ -258,6 +258,7 @@
                     </view>
                     <tabBarItem key="tabBarItem" systemItem="featured" id="RTz-MT-dyO"/>
                     <connections>
+                        <outlet property="lblGoal" destination="EMA-ct-ykQ" id="6EK-34-JRF"/>
                         <outlet property="weightPicker" destination="MLa-IX-9iY" id="ZMh-AB-6zZ"/>
                     </connections>
                 </viewController>

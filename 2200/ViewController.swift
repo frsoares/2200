@@ -24,8 +24,9 @@ class ViewController: UIViewController , CountDelegate {
     var stepCounter : StepCounter?
   
     @IBOutlet weak var weightPicker: UIPickerView!
-    @IBOutlet weak var lblGoal: UILabel!
   
+    @IBOutlet weak var lblGoal: UILabel!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
