@@ -8,19 +8,34 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+import HealthKit
+
+class ViewController: UIViewController , CountDelegate {
         
     var kgArray = ["81","82","83","84","85"]
     
     var greenColor = UIColor(red: CGFloat(84.0/255.0), green: CGFloat(174.0/255.0), blue: CGFloat(58.0/255.0), alpha: CGFloat(1.0))
-    
+  
+    var healthStore : HKHealthStore = HKHealthStore()
+  
+    var stepCounter : StepCounter?
+  
     @IBOutlet weak var weightPicker: UIPickerView!
-    
+    @IBOutlet weak var lblGoal: UILabel!
+  
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
-        
-        
+  
+  
+        self.stepCounter = StepCounter(healthStore: healthStore, delegate: self);
+      
+    }
+  
+    override func viewDidAppear(animated: Bool) {
+      if let count = stepCounter?.stepCount {
+        countUpdated(count)
+      }
     }
 
     override func didReceiveMemoryWarning() {
@@ -54,6 +69,16 @@ class ViewController: UIViewController {
         return myTitle
     }
 
+  
+  
+    /*
+     Method called every time the step counter is updated.
+    */
+    func countUpdated(newCount: Int) {
+  
+      self.lblGoal.text = "\(newCount)"
+    
+    }
     
 }
 
