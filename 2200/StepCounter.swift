@@ -71,6 +71,8 @@ class StepCounter {
       }
     })
     
+    
+    healthStore.executeQuery(statQuery);
   }
   
   
