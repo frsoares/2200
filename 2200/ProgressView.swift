@@ -36,8 +36,8 @@ class ProgressView: UIView {
   
         // Polygon Drawing
         var polygonPath = UIBezierPath()
-        polygonPath.moveToPoint(CGPointMake(200, polyPosition1))
-        polygonPath.addLineToPoint(CGPointMake(400, polyPosition2))
+        polygonPath.moveToPoint(CGPointMake(190, polyPosition1))
+        polygonPath.addLineToPoint(CGPointMake(380, polyPosition2))
         polygonPath.addLineToPoint(CGPointMake(0, polyPosition2))
         polygonPath.closePath()
         color.setFill()
@@ -45,7 +45,7 @@ class ProgressView: UIView {
 
 
         //// Rectangle Drawing
-        let rectanglePath = UIBezierPath(rect: CGRectMake(0, rectPosition, 400, 362))
+        let rectanglePath = UIBezierPath(rect: CGRectMake(0, rectPosition, 380, 362))
         color.setFill()
         rectanglePath.fill()
         

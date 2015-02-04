@@ -27,6 +27,8 @@ class ViewController: UIViewController , CountDelegate {
   
     @IBOutlet weak var lblGoal: UILabel!
     
+    @IBOutlet weak var lblSteps: UILabel!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
@@ -53,10 +55,6 @@ class ViewController: UIViewController , CountDelegate {
         return 1
     }
     
-    func pickerView(pickerView: UIPickerView!, selectedRowInComponent component: Int) -> Int {
-        return 3
-    }
-
     func pickerView(pickerView: UIPickerView!,
         numberOfRowsInComponent component: Int) -> Int {
             return kgArray.count
@@ -67,14 +65,27 @@ class ViewController: UIViewController , CountDelegate {
         return kgArray[row]
     }
     
-    func pickerView(pickerView: UIPickerView!, attributedTitleForRow row: Int, forComponent component: Int) -> NSAttributedString? {
-        var titleData = kgArray[row]
-        var myTitle = NSAttributedString(string: titleData, attributes: [NSFontAttributeName:UIFont(name: "HelveticaNeue-UltraLight", size: 20)!,NSForegroundColorAttributeName:greenColor])
-        return myTitle
+    
+    func pickerView(pickerView: UIPickerView, viewForRow row: Int, forComponent component: Int, reusingView view: UIView!) -> UIView
+    {
+        var pickerLabel = UILabel()
+        pickerLabel.textColor = greenColor
+        pickerLabel.text = kgArray[row]
+        // pickerLabel.font = UIFont(name: pickerLabel.font.fontName, size: 15)
+        pickerLabel.font = UIFont(name: "HelveticaNeue-Light", size: 30) // In this use your custom font
+        pickerLabel.textAlignment = NSTextAlignment.Center
+        return pickerLabel
     }
     
+    func pickerView(pickerView: UIPickerView, rowHeightForComponent component: Int) -> CGFloat {
+        return 36.0
+    }
+    
+    func selectedRowInComponent(component: Int) -> Int {
+        return 2
+    }
 
-  
+
   
     /*
      Method called every time the step counter is updated.
