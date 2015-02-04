@@ -13,6 +13,7 @@
 		1F843F941A81302500E1DFEA /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1F843F931A81302500E1DFEA /* Images.xcassets */; };
 		1F843F971A81302500E1DFEA /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1F843F951A81302500E1DFEA /* LaunchScreen.xib */; };
 		1F843FA31A81302500E1DFEA /* _200Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F843FA21A81302500E1DFEA /* _200Tests.swift */; };
+		1FC2747A1A82403A00562C02 /* ReminderTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FC274791A82403A00562C02 /* ReminderTableViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -36,6 +37,7 @@
 		1F843F9C1A81302500E1DFEA /* 2200Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = 2200Tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		1F843FA11A81302500E1DFEA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		1F843FA21A81302500E1DFEA /* _200Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = _200Tests.swift; sourceTree = "<group>"; };
+		1FC274791A82403A00562C02 /* ReminderTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ReminderTableViewController.swift; path = ../ReminderTableViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -79,6 +81,7 @@
 			children = (
 				1F843F8C1A81302500E1DFEA /* AppDelegate.swift */,
 				1F843F8E1A81302500E1DFEA /* ViewController.swift */,
+				1FC274791A82403A00562C02 /* ReminderTableViewController.swift */,
 				1F843F901A81302500E1DFEA /* Main.storyboard */,
 				1F843F931A81302500E1DFEA /* Images.xcassets */,
 				1F843F951A81302500E1DFEA /* LaunchScreen.xib */,
@@ -214,6 +217,7 @@
 			files = (
 				1F843F8F1A81302500E1DFEA /* ViewController.swift in Sources */,
 				1F843F8D1A81302500E1DFEA /* AppDelegate.swift in Sources */,
+				1FC2747A1A82403A00562C02 /* ReminderTableViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -405,6 +409,7 @@
 				1F843FA81A81302500E1DFEA /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		1F843FA91A81302500E1DFEA /* Build configuration list for PBXNativeTarget "2200Tests" */ = {
 			isa = XCConfigurationList;
@@ -413,6 +418,7 @@
 				1F843FAB1A81302500E1DFEA /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
