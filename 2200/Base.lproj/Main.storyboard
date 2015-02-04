@@ -46,12 +46,9 @@
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="362"/>
                                 </variation>
                             </imageView>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="NEh-sb-uKr" customClass="ProgressView" customModule="_200" customModuleProvider="target">
+                            <view contentMode="scaleAspectFit" translatesAutoresizingMaskIntoConstraints="NO" id="NEh-sb-uKr" customClass="ProgressView" customModule="_200" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
-                                <color key="backgroundColor" red="0.3294117647" green="0.68235294120000001" blue="0.2274509804" alpha="1" colorSpace="calibratedRGB"/>
-                                <variation key="heightClass=regular-widthClass=compact" fixedFrame="YES">
-                                    <rect key="frame" x="0.0" y="0.0" width="400" height="362"/>
-                                </variation>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" ambiguous="YES" misplaced="YES" text="4500" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EMA-ct-ykQ">
                                 <rect key="frame" x="150" y="50" width="300" height="125"/>
@@ -176,17 +173,21 @@
                             </constraint>
                             <constraint firstAttribute="trailingMargin" secondItem="Ft8-nR-PNc" secondAttribute="trailing" constant="-16" id="N7g-Mu-g6h"/>
                             <constraint firstItem="MBo-Pb-enh" firstAttribute="top" secondItem="kh9-bI-dsS" secondAttribute="topMargin" id="N90-pw-nXh"/>
+                            <constraint firstItem="NEh-sb-uKr" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leadingMargin" constant="-16" id="ODX-ik-JJ0"/>
                             <constraint firstItem="MLa-IX-9iY" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leadingMargin" constant="128" id="Ovt-jD-mXd">
                                 <variation key="heightClass=regular-widthClass=compact" constant="150"/>
                             </constraint>
                             <constraint firstItem="EMA-ct-ykQ" firstAttribute="top" secondItem="kh9-bI-dsS" secondAttribute="topMargin" constant="50" id="Qyl-Tm-VgP"/>
                             <constraint firstAttribute="centerX" secondItem="LxM-Nt-LvK" secondAttribute="centerX" id="TGL-ms-P4R"/>
+                            <constraint firstItem="NEh-sb-uKr" firstAttribute="top" secondItem="kh9-bI-dsS" secondAttribute="topMargin" id="ULC-es-5rl"/>
                             <constraint firstAttribute="trailingMargin" secondItem="MBo-Pb-enh" secondAttribute="trailing" constant="-16" id="UcK-oL-4a4"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="NEh-sb-uKr" secondAttribute="trailing" constant="-16" id="UtQ-Pj-QWm"/>
                             <constraint firstItem="MBo-Pb-enh" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leadingMargin" constant="-16" id="dab-u3-bUU"/>
                             <constraint firstItem="Ft8-nR-PNc" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leadingMargin" constant="-16" id="kfo-DD-OTm"/>
                             <constraint firstItem="MLa-IX-9iY" firstAttribute="top" secondItem="Ft8-nR-PNc" secondAttribute="top" constant="150" id="rg7-9E-G0B">
                                 <variation key="heightClass=regular-widthClass=compact" constant="80"/>
                             </constraint>
+                            <constraint firstItem="Ft8-nR-PNc" firstAttribute="top" secondItem="NEh-sb-uKr" secondAttribute="bottom" id="ua0-v5-TCH"/>
                         </constraints>
                         <variation key="default">
                             <mask key="subviews">
@@ -199,6 +200,9 @@
                                 <exclude reference="N90-pw-nXh"/>
                                 <exclude reference="UcK-oL-4a4"/>
                                 <exclude reference="dab-u3-bUU"/>
+                                <exclude reference="ODX-ik-JJ0"/>
+                                <exclude reference="ULC-es-5rl"/>
+                                <exclude reference="UtQ-Pj-QWm"/>
                                 <exclude reference="GSb-aO-FHV"/>
                                 <exclude reference="Qyl-Tm-VgP"/>
                                 <exclude reference="8c4-V4-BI1"/>
@@ -206,12 +210,13 @@
                                 <exclude reference="8Ms-Ci-Dwj"/>
                                 <exclude reference="N7g-Mu-g6h"/>
                                 <exclude reference="kfo-DD-OTm"/>
-                                <exclude reference="7rf-dV-bmh"/>
-                                <exclude reference="Dds-vD-dLj"/>
+                                <exclude reference="ua0-v5-TCH"/>
                                 <exclude reference="5a9-t5-jsH"/>
                                 <exclude reference="JrQ-tU-wkS"/>
                                 <exclude reference="Ovt-jD-mXd"/>
                                 <exclude reference="rg7-9E-G0B"/>
+                                <exclude reference="7rf-dV-bmh"/>
+                                <exclude reference="Dds-vD-dLj"/>
                             </mask>
                         </variation>
                         <variation key="widthClass=compact">
@@ -235,15 +240,19 @@
                                 <include reference="N90-pw-nXh"/>
                                 <include reference="UcK-oL-4a4"/>
                                 <include reference="dab-u3-bUU"/>
+                                <include reference="ODX-ik-JJ0"/>
+                                <include reference="ULC-es-5rl"/>
+                                <include reference="UtQ-Pj-QWm"/>
                                 <include reference="8Ms-Ci-Dwj"/>
                                 <include reference="N7g-Mu-g6h"/>
                                 <include reference="kfo-DD-OTm"/>
-                                <include reference="7rf-dV-bmh"/>
-                                <include reference="Dds-vD-dLj"/>
+                                <include reference="ua0-v5-TCH"/>
                                 <include reference="5a9-t5-jsH"/>
                                 <include reference="JrQ-tU-wkS"/>
                                 <include reference="Ovt-jD-mXd"/>
                                 <include reference="rg7-9E-G0B"/>
+                                <include reference="7rf-dV-bmh"/>
+                                <include reference="Dds-vD-dLj"/>
                             </mask>
                         </variation>
                     </view>

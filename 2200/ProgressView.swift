@@ -14,21 +14,38 @@ class ProgressView: UIView {
     // An empty implementation adversely affects performance during animation.
     override func drawRect(rect: CGRect) {
 
-        var mask = CAShapeLayer()
-        mask.frame = self.layer.bounds
+        //// Color Declarations
+        let color = UIColor(red: 0.565, green: 0.937, blue: 0.478, alpha: 1.000)
         
-        let width = self.layer.frame.size.width
-        let height = self.layer.frame.size.height
+        //// Initial Bezier Drawing
+//        var bezierPath = UIBezierPath()
+//        bezierPath.moveToPoint(CGPointMake(0, 360))
+//        bezierPath.addLineToPoint(CGPointMake(400, 360))
+//        bezierPath.addLineToPoint(CGPointMake(400, 350.46))
+//        bezierPath.addLineToPoint(CGPointMake(200, 327))
+//        bezierPath.addLineToPoint(CGPointMake(0, 350.46))
+//        bezierPath.addLineToPoint(CGPointMake(0, 360))
+//        bezierPath.addLineToPoint(CGPointMake(0, 360))
+//        bezierPath.closePath()
+//        color.setFill()
+//        bezierPath.fill()
         
-        var path = CGPathCreateMutable()
+        //// Rectangle Drawing
+        let rectanglePath = UIBezierPath(rect: CGRectMake(0, 255, 400, 105))
+        color.setFill()
+        rectanglePath.fill()
         
-        CGPathMoveToPoint(path, nil, 30, 0)
-        CGPathAddLineToPoint(path, nil, width, 0)
-        CGPathAddLineToPoint(path, nil, width, height)
-        CGPathAddLineToPoint(path, nil, 0, height)
-        CGPathAddLineToPoint(path, nil, 30, 0)
+        //// Polygon Drawing
+        var polygonPath = UIBezierPath()
+        polygonPath.moveToPoint(CGPointMake(200, 230))
+        polygonPath.addLineToPoint(CGPointMake(400, 255))
+        polygonPath.addLineToPoint(CGPointMake(0, 255))
+        polygonPath.closePath()
+        color.setFill()
+        polygonPath.fill()
+    
+        let progressAnimation = CABasicAnimation()
         
-        mask.path = path
-}
+    }
 
 }
