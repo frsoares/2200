@@ -28,5 +28,6 @@ class Goal: NSObject, NSCoding {
         aCoder.encodeInt(_weight, forKey: "weight")
         
     }
+    
 }
     
