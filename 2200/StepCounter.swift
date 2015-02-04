@@ -51,9 +51,12 @@ class StepCounter {
   private func initStepCount(){
     
     let past : NSDate = NSDate.distantPast() as NSDate
+    
+    let yesterday = NSDate(timeIntervalSinceNow: -24*60*60)
+    
     let now = NSDate()
     
-    let mostRecentPredicate = HKQuery.predicateForSamplesWithStartDate(past, endDate: now, options: HKQueryOptions.None)
+    let mostRecentPredicate = HKQuery.predicateForSamplesWithStartDate(yesterday, endDate: now, options: HKQueryOptions.StrictStartDate)
     
     let sortDescriptor = NSSortDescriptor(key: HKSampleSortIdentifierStartDate, ascending: false);
     
