@@ -9,5 +9,20 @@
 import UIKit
 
 class GoalStore: NSObject {
-   
+    
+    
+    func getGoal() -> Goal? {
+        if let data = NSUserDefaults.standardUserDefaults().objectForKey("goalData") as? NSData {
+            return NSKeyedUnarchiver.unarchiveObjectWithData(data) as? Goal
+        }
+        return nil;
+    }
+    
+    
+    func saveGoal(newGoal: Goal) {
+        let data = NSKeyedArchiver.archivedDataWithRootObject(newGoal)
+        NSUserDefaults.standardUserDefaults().setObject(data, forKey: "goaldata")
+    }
+    
+    
 }
