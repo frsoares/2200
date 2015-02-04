@@ -18,6 +18,7 @@
 		DB3834C01A82534C00870033 /* StepCounter.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB3834BF1A82534C00870033 /* StepCounter.swift */; };
 		F2408B111A825E1900C461A6 /* StepToCalorieConverter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2408B101A825E1900C461A6 /* StepToCalorieConverter.swift */; };
 		F2408B131A827D2A00C461A6 /* GoalStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2408B121A827D2A00C461A6 /* GoalStore.swift */; };
+		F2408B171A82874600C461A6 /* Goal.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2408B161A82874600C461A6 /* Goal.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -47,6 +48,7 @@
 		DB3834BF1A82534C00870033 /* StepCounter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StepCounter.swift; sourceTree = "<group>"; };
 		F2408B101A825E1900C461A6 /* StepToCalorieConverter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StepToCalorieConverter.swift; sourceTree = "<group>"; };
 		F2408B121A827D2A00C461A6 /* GoalStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GoalStore.swift; sourceTree = "<group>"; };
+		F2408B161A82874600C461A6 /* Goal.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Goal.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -101,6 +103,7 @@
 				1F843F8A1A81302500E1DFEA /* Supporting Files */,
 				F2408B101A825E1900C461A6 /* StepToCalorieConverter.swift */,
 				F2408B121A827D2A00C461A6 /* GoalStore.swift */,
+				F2408B161A82874600C461A6 /* Goal.swift */,
 			);
 			path = 2200;
 			sourceTree = "<group>";
@@ -250,6 +253,7 @@
 				DB3834C01A82534C00870033 /* StepCounter.swift in Sources */,
 				F2408B131A827D2A00C461A6 /* GoalStore.swift in Sources */,
 				1FC274801A8265EE00562C02 /* ProgressView.swift in Sources */,
+				F2408B171A82874600C461A6 /* Goal.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
