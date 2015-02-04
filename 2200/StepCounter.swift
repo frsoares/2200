@@ -14,13 +14,20 @@ class StepCounter {
   
   var healthStore : HKHealthStore;
   
-  var stepCount : Int
+  var stepCount : Int {
+    didSet{
+      self.delegate.countUpdated(stepCount)
+    }
+  }
   
-  init(healthStore : HKHealthStore){
+  var delegate : CountDelegate;
+  
+  init(healthStore : HKHealthStore, delegate : CountDelegate){
     
     self.healthStore = healthStore
     
     self.stepCount = 0;
+    self.delegate = delegate
     
     healthStore.requestAuthorizationToShareTypes(nil, readTypes: dataTypesToRead(), completion: {
       (success:Bool, error:NSError!) -> Void in
@@ -75,11 +82,17 @@ class StepCounter {
 //    var type1 = HKObjectType.quantityTypeForIdentifier(HKQuantityTypeIdentifierBodyMass)
 //    var type2 = HKObjectType.quantityTypeForIdentifier(HKQuantityTypeIdentifierHeight)
 //    var type3 = HKObjectType.quantityTypeForIdentifier(HKQuantityTypeIdentifierDistanceWalkingRunning)
-    var type4 = HKObjectType.quantityTypeForIdentifier(HKQuantityTypeIdentifierStepCount)
+    var typeStepCount = HKObjectType.quantityTypeForIdentifier(HKQuantityTypeIdentifierStepCount)
 
-    return NSSet(objects: type4)
+    return NSSet(objects: typeStepCount)
     
   }
   
+  
+}
+
+protocol CountDelegate{
+  
+  func countUpdated(newCount:Int);
   
 }
