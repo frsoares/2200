@@ -8,10 +8,13 @@
 
 import UIKit
 
+
 import HealthKit
 
 class ViewController: UIViewController , CountDelegate {
-        
+  
+    var progress: Int = 0
+    
     var kgArray = ["81","82","83","84","85"]
     
     var greenColor = UIColor(red: CGFloat(84.0/255.0), green: CGFloat(174.0/255.0), blue: CGFloat(58.0/255.0), alpha: CGFloat(1.0))
@@ -68,6 +71,7 @@ class ViewController: UIViewController , CountDelegate {
         var myTitle = NSAttributedString(string: titleData, attributes: [NSFontAttributeName:UIFont(name: "HelveticaNeue-UltraLight", size: 20)!,NSForegroundColorAttributeName:greenColor])
         return myTitle
     }
+    
 
   
   

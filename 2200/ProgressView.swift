@@ -8,44 +8,67 @@
 
 import UIKit
 
-class ProgressView: UIView {
+var progress: CGFloat = 1
 
+class ProgressView: UIView {
+    
+    
+//    var propertyChangedListener : (CGFloat, CGFloat) -> Void = {
+//        println("The value of progress has changed from \($0) to \($1)")
+//    }
+//    
+//    var progress: CGFloat = 0 {
+//        didSet{
+//            ProgressView.setNeedsDisplay()
+//            propertyChangedListener(oldValue, ProgressView.progress)
+//        }
+//    }
+    
+    let rectPosition = 362 + (-progress * 36) 
+    let polyPosition1 = 340 + (-progress * 36)
+    let polyPosition2 = 362 + (-progress * 36)
+    
     // Only override drawRect: if you perform custom drawing.
     // An empty implementation adversely affects performance during animation.
     override func drawRect(rect: CGRect) {
 
         //// Color Declarations
         let color = UIColor(red: 0.565, green: 0.937, blue: 0.478, alpha: 1.000)
-        
-        //// Initial Bezier Drawing
-//        var bezierPath = UIBezierPath()
-//        bezierPath.moveToPoint(CGPointMake(0, 360))
-//        bezierPath.addLineToPoint(CGPointMake(400, 360))
-//        bezierPath.addLineToPoint(CGPointMake(400, 350.46))
-//        bezierPath.addLineToPoint(CGPointMake(200, 327))
-//        bezierPath.addLineToPoint(CGPointMake(0, 350.46))
-//        bezierPath.addLineToPoint(CGPointMake(0, 360))
-//        bezierPath.addLineToPoint(CGPointMake(0, 360))
-//        bezierPath.closePath()
-//        color.setFill()
-//        bezierPath.fill()
-        
-        //// Rectangle Drawing
-        let rectanglePath = UIBezierPath(rect: CGRectMake(0, 255, 400, 105))
-        color.setFill()
-        rectanglePath.fill()
-        
-        //// Polygon Drawing
+
+  
+        // Polygon Drawing
         var polygonPath = UIBezierPath()
-        polygonPath.moveToPoint(CGPointMake(200, 230))
-        polygonPath.addLineToPoint(CGPointMake(400, 255))
-        polygonPath.addLineToPoint(CGPointMake(0, 255))
+        polygonPath.moveToPoint(CGPointMake(200, polyPosition1))
+        polygonPath.addLineToPoint(CGPointMake(400, polyPosition2))
+        polygonPath.addLineToPoint(CGPointMake(0, polyPosition2))
         polygonPath.closePath()
         color.setFill()
         polygonPath.fill()
-    
-        let progressAnimation = CABasicAnimation()
+
+
+        //// Rectangle Drawing
+        let rectanglePath = UIBezierPath(rect: CGRectMake(0, rectPosition, 400, 362))
+        color.setFill()
+        rectanglePath.fill()
+        
+        /// animation
+        
+//        func moveProgress(view: ProgressView){
+//            var toPoint: CGPoint = CGPointMake(0.0, 320.0)
+//            var fromPoint : CGPoint = CGPointMake(0.0, 0.0)
+//            
+//            var movement = CABasicAnimation(keyPath: "movement")
+//            movement.additive = true
+//            movement.fromValue =  NSValue(CGPoint: fromPoint)
+//            movement.toValue =  NSValue(CGPoint: toPoint)
+//            movement.duration = 0.3
+//            
+//            view.layer.addAnimation(movement, forKey: "move")
+//        }
+        
+        
         
     }
+    
 
 }
