@@ -29,6 +29,12 @@ class Goal: NSObject, NSCoding {
             _weeks = newWeeks
         }
     }
+    
+    
+    override init () {
+            _weight = 65
+    }
+    
     required init(coder aDecoder: NSCoder) {
         _weight  = aDecoder.decodeIntForKey("weight")
         _weeks  = aDecoder.decodeIntForKey("weeks")

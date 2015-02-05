@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1F5F41501A84075B0065C1B0 /* SettingsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F5F414F1A84075B0065C1B0 /* SettingsTableViewController.swift */; };
 		1F843F8D1A81302500E1DFEA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F843F8C1A81302500E1DFEA /* AppDelegate.swift */; };
 		1F843F8F1A81302500E1DFEA /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F843F8E1A81302500E1DFEA /* ViewController.swift */; };
 		1F843F921A81302500E1DFEA /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1F843F901A81302500E1DFEA /* Main.storyboard */; };
@@ -17,7 +18,6 @@
 		1FF370D21A83B4F70063E48C /* GoalSetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FF370D11A83B4F70063E48C /* GoalSetViewController.swift */; };
 		1FF370D61A83D4540063E48C /* ReminderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FF370D51A83D4540063E48C /* ReminderViewController.swift */; };
 		1FF370DA1A83FCD70063E48C /* TutorialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FF370D91A83FCD70063E48C /* TutorialViewController.swift */; };
-		1FF370DC1A8401720063E48C /* SettingsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FF370DB1A8401720063E48C /* SettingsTableViewController.swift */; };
 		DB3834BC1A8244E200870033 /* HealthKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DB3834BB1A8244E200870033 /* HealthKit.framework */; };
 		DB3834C01A82534C00870033 /* StepCounter.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB3834BF1A82534C00870033 /* StepCounter.swift */; };
 		F2408B111A825E1900C461A6 /* StepToCalorieConverter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2408B101A825E1900C461A6 /* StepToCalorieConverter.swift */; };
@@ -36,6 +36,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		1F5F414F1A84075B0065C1B0 /* SettingsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsTableViewController.swift; sourceTree = "<group>"; };
 		1F843F871A81302500E1DFEA /* 2200.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = 2200.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1F843F8B1A81302500E1DFEA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		1F843F8C1A81302500E1DFEA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -50,7 +51,6 @@
 		1FF370D11A83B4F70063E48C /* GoalSetViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GoalSetViewController.swift; sourceTree = "<group>"; };
 		1FF370D51A83D4540063E48C /* ReminderViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReminderViewController.swift; sourceTree = "<group>"; };
 		1FF370D91A83FCD70063E48C /* TutorialViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TutorialViewController.swift; sourceTree = "<group>"; };
-		1FF370DB1A8401720063E48C /* SettingsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsTableViewController.swift; sourceTree = "<group>"; };
 		DB3834BB1A8244E200870033 /* HealthKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = HealthKit.framework; path = System/Library/Frameworks/HealthKit.framework; sourceTree = SDKROOT; };
 		DB3834BD1A8244E200870033 /* 2200.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = 2200.entitlements; sourceTree = "<group>"; };
 		DB3834BF1A82534C00870033 /* StepCounter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StepCounter.swift; sourceTree = "<group>"; };
@@ -148,7 +148,7 @@
 				1FF370D11A83B4F70063E48C /* GoalSetViewController.swift */,
 				1FF370D51A83D4540063E48C /* ReminderViewController.swift */,
 				1FF370D91A83FCD70063E48C /* TutorialViewController.swift */,
-				1FF370DB1A8401720063E48C /* SettingsTableViewController.swift */,
+				1F5F414F1A84075B0065C1B0 /* SettingsTableViewController.swift */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -274,7 +274,7 @@
 				DB3834C01A82534C00870033 /* StepCounter.swift in Sources */,
 				F2408B131A827D2A00C461A6 /* GoalStore.swift in Sources */,
 				1FC274801A8265EE00562C02 /* ProgressView.swift in Sources */,
-				1FF370DC1A8401720063E48C /* SettingsTableViewController.swift in Sources */,
+				1F5F41501A84075B0065C1B0 /* SettingsTableViewController.swift in Sources */,
 				F2408B171A82874600C461A6 /* Goal.swift in Sources */,
 				1FF370DA1A83FCD70063E48C /* TutorialViewController.swift in Sources */,
 				1FF370D21A83B4F70063E48C /* GoalSetViewController.swift in Sources */,
