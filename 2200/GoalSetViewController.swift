@@ -24,25 +24,25 @@ class GoalSetViewController: UIViewController {
     
     let maxUserWeight = 150
     
-    var userWeight = 65
+    var userGoal:Goal = Goal()
+    
+    var goalStore = GoalStore()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        if let tempGoal = goalStore.getGoal() {
+            println("Goal object retrieved")
+            self.userGoal = tempGoal
+        }
+        self.loadWeightArray()
+        setWeightInUI() 
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
-    func loadWeightArray() {
-        for (var i = defaultUserWeight; i <= maxUserWeight; i++)
-        {
-            kgArray.append(String(i));
-        }
-    }
+
     
     func numberOfComponentsInPickerView(pickerView: UIPickerView!) -> Int {
         return 1
@@ -74,13 +74,37 @@ class GoalSetViewController: UIViewController {
         return 36.0
     }
     
+    func pickerView(pickerView: UIPickerView,
+        didSelectRow row: Int,
+        inComponent component: Int) {
+            
+            let alertController = UIAlertController(title: "Confirmation", message: "Confirm weight change?", preferredStyle: .Alert)
+            
+            let cancelAction = UIAlertAction(title: "Cancel", style: .Cancel) { (action) in
+                self.setWeightInUI(animation:true)
+            }
+            alertController.addAction(cancelAction)
+            
+            let OKAction = UIAlertAction(title: "OK", style: .Default) { (action) in
+                self.userGoal.weight = Int32(self.kgArray[row].toInt()!)
+                self.goalStore.saveGoal(self.userGoal)
+                
+            }
+            alertController.addAction(OKAction)
+            
+            self.presentViewController(alertController, animated: true) {
+                
+            }
+    }
+
     func selectedRowInComponent(component: Int) -> Int {
         var pos = -1
         var count = 0
+        var weight = Int(self.userGoal.weight)
         
         for (var i = defaultUserWeight; i <= maxUserWeight && pos == -1 ; i++, count++)
         {
-            if (i == userWeight)
+            if (i == weight)
             {
                 pos = count
             }
@@ -88,17 +112,16 @@ class GoalSetViewController: UIViewController {
         return pos
     }
     
-
-
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+    func loadWeightArray() {
+        for (var i = defaultUserWeight; i <= maxUserWeight; i++)
+        {
+            kgArray.append(String(i));
+        }
     }
-    */
+
+    
+    func setWeightInUI(animation: Bool = false) {
+        self.goalPicker.selectRow(self.selectedRowInComponent(Int(userGoal.weight)), inComponent: 0, animated: animation)
+    }
 
 }
