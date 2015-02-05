@@ -7,12 +7,20 @@
 //
 
 import Foundation
-
+import UIKit
 import HealthKit
 
 class StepCounter {
   
   var healthStore : HKHealthStore;
+  
+  var anchor : Int = 0;
+  
+  var obQuery : HKObserverQuery?
+  
+  var start : NSDate;
+  
+  //  var predicate : NSPredicate?
   
   var stepCount : Int {
     didSet{
@@ -26,17 +34,19 @@ class StepCounter {
     
     self.healthStore = healthStore
     
+    self.start = NSDate(timeIntervalSinceNow: -24*60*60) // now - 1 day
+    
     self.stepCount = 0;
-    self.delegate = delegate
+    self.delegate = delegate;
     
     healthStore.requestAuthorizationToShareTypes(nil, readTypes: dataTypesToRead(), completion: {
       (success:Bool, error:NSError!) -> Void in
-//      if !success{
-//        var alert = UIAlertView(title: "Missed authorization", message: "The app cannot work without authorization for HealthKit. Closing", delegate: nil, cancelButtonTitle: nil, otherButtonTitles: "Close")
-//        alert.show();
-//        self.dismissViewControllerAnimated(true, completion: nil)
-        
-//      }
+      //      if !success{
+      //        var alert = UIAlertView(title: "Missed authorization", message: "The app cannot work without authorization for HealthKit. Closing", delegate: nil, cancelButtonTitle: nil, otherButtonTitles: "Close")
+      //        alert.show();
+      //        self.dismissViewControllerAnimated(true, completion: nil)
+      
+      //      }
       if success {
         
         println("Permission acquired")
@@ -44,39 +54,117 @@ class StepCounter {
         self.initStepCount()
         
       }
+      
+      
+      self.startObservingBackgroundChanges()
+      
+      
     })
-   
+    
   }
+  
+  
   
   private func initStepCount(){
     
-    let past : NSDate = NSDate.distantPast() as NSDate
+    //    let past : NSDate = NSDate.distantPast() as NSDate
     
-    let yesterday = NSDate(timeIntervalSinceNow: -24*60*60)
     
-    let now = NSDate()
     
-    let mostRecentPredicate = HKQuery.predicateForSamplesWithStartDate(yesterday, endDate: now, options: HKQueryOptions.StrictStartDate)
+    
+    let yesterday = start; //NSDate(timeIntervalSinceNow: -24*60*60)
+    
     
     let sortDescriptor = NSSortDescriptor(key: HKSampleSortIdentifierStartDate, ascending: false);
     
     let idSteps = HKObjectType.quantityTypeForIdentifier(HKQuantityTypeIdentifierStepCount)
     
-    let statQuery = HKStatisticsQuery(quantityType: idSteps, quantitySamplePredicate: mostRecentPredicate, options: HKStatisticsOptions.CumulativeSum, completionHandler: {(_,statistics,_) -> Void in
-      if (statistics != nil) {
+    //    let statQuery = HKStatisticsQuery(quantityType: idSteps, quantitySamplePredicate: mostRecentPredicate, options: HKStatisticsOptions.CumulativeSum, completionHandler: {(_,statistics,_) -> Void in
+    //      if (statistics != nil) {
+    //
+    //        if let quantity : HKQuantity! = statistics.sumQuantity(){
+    //            if let q = quantity {
+    //                var unit = HKUnit(fromString: "count")
+    //                self.stepCount = Int(q.doubleValueForUnit(unit));
+    //            }
+    //        }
+    //
+    //      }
+    //    })
+    
+    
+    //        if let setUpQuery = self.obQuery {
+    //          self.healthStore.stopQuery(setUpQuery);
+    //          self.obQuery = nil;
+    //        }
+    //
+    
+    if let setUpQuery = self.obQuery {
+      // skip;
+    }
+    else{
+      self.obQuery = HKObserverQuery(sampleType: idSteps, predicate:nil, updateHandler: {(_, handler, _) -> Void in
         
-        if let quantity : HKQuantity! = statistics.sumQuantity(){
-            if let q = quantity {
-                var unit = HKUnit(fromString: "count")
-                self.stepCount = Int(q.doubleValueForUnit(unit));
+        let mostRecentPredicate = HKQuery.predicateForSamplesWithStartDate(yesterday, endDate: NSDate(), options: HKQueryOptions.StrictStartDate)
+        
+        //        dispatch_after(5*1000,dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), { self.initStepCount() });
+        //        //            self.initStepCount();
+        
+        let anchorQuery = HKAnchoredObjectQuery(type: idSteps, predicate: mostRecentPredicate, anchor: self.anchor, limit: 0, completionHandler: {(_, results, newAnchor,_) -> Void in
+          if (results != nil) {
+            
+            self.anchor = newAnchor
+            
+            var sum:Int = 0
+            
+            var unit = HKUnit(fromString: "count")
+            
+            for quantitySample : HKQuantitySample in results as [HKQuantitySample]! {
+              var quantity = quantitySample.quantity
+              sum += Int(quantity.doubleValueForUnit(unit))
             }
-        }
+            
+            self.stepCount += sum
+            
+            //        if let quantity : HKQuantity! = statistics.sumQuantity(){
+            //            if let q = quantity {
+            //                var unit = HKUnit(fromString: "count")
+            //                self.stepCount = Int(q.doubleValueForUnit(unit));
+            //            }
+            //        }
+            
+            
+            
+            
+            
+          }
+        })
+        self.healthStore.executeQuery(anchorQuery);
+        //
+        //    healthStore.executeQuery(statQuery);
         
-      }
-    })
+
+        handler()
+        
+        /* For testing purposes */
+//        dispatch_async(dispatch_get_main_queue(), {
+//          
+//          var alert  = UIAlertView(title: "Update", message: "Passos atualizados", delegate: nil, cancelButtonTitle: nil, otherButtonTitles: "ok" );
+//          alert.show()
+//          
+//        });
+        
+        
+      })
+      
+      
+      
+      
+      self.healthStore.executeQuery(self.obQuery);
+    }
     
     
-    healthStore.executeQuery(statQuery);
+    
   }
   
   
@@ -85,15 +173,49 @@ class StepCounter {
     var typeIds = [HKQuantityTypeIdentifierHeight, HKQuantityTypeIdentifierBodyMass, HKQuantityTypeIdentifierDistanceWalkingRunning]
     
     
-//    var type1 = HKObjectType.quantityTypeForIdentifier(HKQuantityTypeIdentifierBodyMass)
-//    var type2 = HKObjectType.quantityTypeForIdentifier(HKQuantityTypeIdentifierHeight)
-//    var type3 = HKObjectType.quantityTypeForIdentifier(HKQuantityTypeIdentifierDistanceWalkingRunning)
+    var typeBodyMass = HKObjectType.quantityTypeForIdentifier(HKQuantityTypeIdentifierBodyMass)
+    //    var type2 = HKObjectType.quantityTypeForIdentifier(HKQuantityTypeIdentifierHeight)
+    //    var type3 = HKObjectType.quantityTypeForIdentifier(HKQuantityTypeIdentifierDistanceWalkingRunning)
     var typeStepCount = HKObjectType.quantityTypeForIdentifier(HKQuantityTypeIdentifierStepCount)
-
-    return NSSet(objects: typeStepCount)
+    
+    return NSSet(objects: typeStepCount, typeBodyMass)
     
   }
   
+  func startObservingBackgroundChanges(){
+    let idSteps = HKObjectType.quantityTypeForIdentifier(HKQuantityTypeIdentifierStepCount)
+    
+    self.healthStore.enableBackgroundDeliveryForType(idSteps, frequency: .Immediate, withCompletion: {(success, error) -> Void in
+      
+      if success {
+        println("Enabled background delivery of steps increase")
+        //                            self.healthStore.executeQuery(self.obQuery)
+        
+      }
+      else{
+        if let theError = error {
+          print("Failed to enable background delivery of weight changes")
+          println("Error = \(theError)")
+        }
+      }
+    })
+  }
+  
+  func stopObservingChanges(){
+    healthStore.stopQuery(obQuery)
+    
+    healthStore.disableAllBackgroundDeliveryWithCompletion({(succeeded:Bool, error: NSError!) in
+      if succeeded {
+        println("Disabled background delivery of step count increase")
+      }
+      else{
+        if let theError = error{
+          println("Failed to disable background delivery of steps")
+          println("Error = \(theError)")
+        }
+      }
+    })
+  }
   
 }
 
