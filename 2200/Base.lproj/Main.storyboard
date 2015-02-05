@@ -221,9 +221,7 @@
                                             </subviews>
                                         </tableViewCellContentView>
                                         <connections>
-                                            <segue destination="PkZ-uF-SMe" kind="popover" popoverAnchorView="j8e-De-thA" id="TT2-9u-jnB">
-                                                <popoverArrowDirection key="popoverArrowDirection" up="YES" down="YES" left="YES" right="YES"/>
-                                            </segue>
+                                            <segue destination="PkZ-uF-SMe" kind="modal" id="TT2-9u-jnB"/>
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="10" textLabel="Elx-hu-6cb" detailTextLabel="er8-7P-fql" style="IBUITableViewCellStyleValue1" id="VzO-Tl-O3N">
@@ -246,7 +244,7 @@
                                             </subviews>
                                         </tableViewCellContentView>
                                         <connections>
-                                            <segue destination="wOY-gb-RKr" kind="modal" id="I91-dJ-gtb"/>
+                                            <segue destination="KRJ-HB-55J" kind="modal" id="clq-Ly-HTP"/>
                                         </connections>
                                     </tableViewCell>
                                 </cells>
@@ -274,8 +272,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <pickerView contentMode="scaleToFill" misplaced="YES" showsSelectionIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="89G-Uv-6lb">
-                                <rect key="frame" x="0.0" y="114" width="320" height="162"/>
+                            <pickerView contentMode="scaleToFill" showsSelectionIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="89G-Uv-6lb">
+                                <rect key="frame" x="0.0" y="111" width="320" height="162"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="320" id="Od7-gZ-bDl"/>
                                 </constraints>
@@ -284,12 +282,31 @@
                                     <outlet property="delegate" destination="PkZ-uF-SMe" id="xjQ-db-Wio"/>
                                 </connections>
                             </pickerView>
+                            <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VB9-MD-RGu">
+                                <rect key="frame" x="0.0" y="5" width="320" height="44"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="44" id="3NF-no-NKU"/>
+                                    <constraint firstAttribute="width" constant="320" id="yOf-9m-LpR"/>
+                                </constraints>
+                                <items>
+                                    <navigationItem title="Title" id="cAl-hd-viH">
+                                        <barButtonItem key="leftBarButtonItem" title="Done" id="WMq-sb-poz">
+                                            <connections>
+                                                <action selector="doneButton:" destination="PkZ-uF-SMe" id="br6-Ay-na6"/>
+                                            </connections>
+                                        </barButtonItem>
+                                    </navigationItem>
+                                </items>
+                            </navigationBar>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="89G-Uv-6lb" firstAttribute="top" secondItem="QhU-KN-lzA" secondAttribute="bottom" constant="70" id="0GF-71-NtS"/>
                             <constraint firstAttribute="trailingMargin" secondItem="89G-Uv-6lb" secondAttribute="trailing" constant="-16" id="IiR-hg-mgf"/>
+                            <constraint firstItem="89G-Uv-6lb" firstAttribute="top" secondItem="VB9-MD-RGu" secondAttribute="bottom" constant="62" id="Of7-Dv-BVQ"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="VB9-MD-RGu" secondAttribute="trailing" constant="-16" id="SsT-LK-86Y"/>
+                            <constraint firstItem="VB9-MD-RGu" firstAttribute="top" secondItem="QhU-KN-lzA" secondAttribute="bottom" constant="5" id="dgK-GV-VtO"/>
                             <constraint firstItem="89G-Uv-6lb" firstAttribute="leading" secondItem="wW4-pV-fpJ" secondAttribute="leadingMargin" constant="-16" id="eEY-ph-3ID"/>
+                            <constraint firstItem="VB9-MD-RGu" firstAttribute="leading" secondItem="wW4-pV-fpJ" secondAttribute="leadingMargin" constant="-16" id="uWA-U0-i1Y"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Goal Set" id="fNh-HR-oRD">
@@ -303,48 +320,93 @@
             </objects>
             <point key="canvasLocation" x="634" y="1728"/>
         </scene>
-        <!--View Controller-->
-        <scene sceneID="41z-Rp-be3">
+        <!--Goal Set-->
+        <scene sceneID="9N8-VN-8L4">
             <objects>
-                <viewController id="wOY-gb-RKr" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="reminder" id="KRJ-HB-55J" customClass="ReminderViewController" customModule="_200" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="Sft-oS-ZWI"/>
-                        <viewControllerLayoutGuide type="bottom" id="CLx-Q3-kIh"/>
+                        <viewControllerLayoutGuide type="top" id="C1f-qt-Wgd"/>
+                        <viewControllerLayoutGuide type="bottom" id="oA8-GP-5Zq"/>
                     </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="0Ll-EB-7lO">
+                    <view key="view" contentMode="scaleToFill" id="bSq-TO-3ec">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="iGc-jN-4Mp">
-                                <rect key="frame" x="0.0" y="20" width="320" height="44"/>
-                                <items>
-                                    <barButtonItem systemItem="done" id="ITm-03-9SV"/>
-                                </items>
-                            </toolbar>
-                            <pickerView contentMode="scaleToFill" showsSelectionIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8V8-zD-dwN">
-                                <rect key="frame" x="0.0" y="114" width="320" height="162"/>
+                            <pickerView contentMode="scaleToFill" showsSelectionIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7Om-mK-Qef">
+                                <rect key="frame" x="0.0" y="141" width="320" height="162"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="320" id="ANl-oh-KMN"/>
+                                    <constraint firstAttribute="width" constant="320" id="W34-FM-waN"/>
                                 </constraints>
                                 <connections>
-                                    <outlet property="delegate" destination="vXZ-lx-hvc" id="zPE-62-CSQ"/>
+                                    <outlet property="dataSource" destination="KRJ-HB-55J" id="siI-pW-tCf"/>
+                                    <outlet property="delegate" destination="KRJ-HB-55J" id="xUR-TW-hFw"/>
                                 </connections>
                             </pickerView>
+                            <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QI8-iT-jSk">
+                                <rect key="frame" x="0.0" y="5" width="320" height="44"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="44" id="CLb-JG-FHh"/>
+                                    <constraint firstAttribute="width" constant="320" id="DZW-lo-3nT"/>
+                                </constraints>
+                                <items>
+                                    <navigationItem title="Title" id="umI-Tt-PVK">
+                                        <barButtonItem key="leftBarButtonItem" style="plain" id="XQC-h2-RhB">
+                                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="DpY-Ve-R6Q">
+                                                <rect key="frame" x="16" y="15" width="37" height="30"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <state key="normal" title="Done">
+                                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                                </state>
+                                                <connections>
+                                                    <action selector="doneButton:" destination="KRJ-HB-55J" eventType="touchUpInside" id="3vi-gM-PjQ"/>
+                                                </connections>
+                                            </button>
+                                        </barButtonItem>
+                                    </navigationItem>
+                                </items>
+                            </navigationBar>
+                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="xlq-vC-6Ca">
+                                <rect key="frame" x="255" y="72" width="51" height="31"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="31" id="03O-k6-EnX"/>
+                                    <constraint firstAttribute="width" constant="49" id="vGP-pt-14u"/>
+                                </constraints>
+                            </switch>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Daily reminder" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="q7c-X2-q9y">
+                                <rect key="frame" x="16" y="80" width="110" height="21"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="21" id="Ode-qh-Zdv"/>
+                                    <constraint firstAttribute="width" constant="166" id="TP5-KP-Srh"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="8V8-zD-dwN" firstAttribute="leading" secondItem="0Ll-EB-7lO" secondAttribute="leadingMargin" constant="-16" id="Fab-Zp-6hr"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="iGc-jN-4Mp" secondAttribute="trailing" constant="-16" id="JA6-Sa-OZG"/>
-                            <constraint firstItem="iGc-jN-4Mp" firstAttribute="leading" secondItem="0Ll-EB-7lO" secondAttribute="leadingMargin" constant="-16" id="e5V-Mq-DjB"/>
-                            <constraint firstItem="iGc-jN-4Mp" firstAttribute="top" secondItem="Sft-oS-ZWI" secondAttribute="bottom" constant="20" id="hj6-hP-GWh"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="8V8-zD-dwN" secondAttribute="trailing" constant="-16" id="lZv-Fr-2O7"/>
-                            <constraint firstItem="8V8-zD-dwN" firstAttribute="top" secondItem="iGc-jN-4Mp" secondAttribute="bottom" constant="50" id="zoP-kL-MSV"/>
+                            <constraint firstItem="7Om-mK-Qef" firstAttribute="top" secondItem="QI8-iT-jSk" secondAttribute="bottom" constant="92" id="1HT-Ac-Hhn"/>
+                            <constraint firstItem="xlq-vC-6Ca" firstAttribute="trailing" secondItem="bSq-TO-3ec" secondAttribute="trailingMargin" id="23l-iK-lDo"/>
+                            <constraint firstItem="xlq-vC-6Ca" firstAttribute="top" secondItem="QI8-iT-jSk" secondAttribute="bottom" constant="23" id="DzY-GP-afA"/>
+                            <constraint firstItem="q7c-X2-q9y" firstAttribute="leading" secondItem="bSq-TO-3ec" secondAttribute="leadingMargin" id="Wg3-kK-kB2"/>
+                            <constraint firstItem="7Om-mK-Qef" firstAttribute="leading" secondItem="bSq-TO-3ec" secondAttribute="leadingMargin" constant="-16" id="aJF-qg-e4G"/>
+                            <constraint firstItem="QI8-iT-jSk" firstAttribute="leading" secondItem="bSq-TO-3ec" secondAttribute="leadingMargin" constant="-16" id="ede-AN-g5d"/>
+                            <constraint firstItem="QI8-iT-jSk" firstAttribute="top" secondItem="C1f-qt-Wgd" secondAttribute="bottom" constant="5" id="eq0-J3-1Qk"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="QI8-iT-jSk" secondAttribute="trailing" constant="-16" id="ngZ-H1-Ww0"/>
+                            <constraint firstItem="q7c-X2-q9y" firstAttribute="top" secondItem="QI8-iT-jSk" secondAttribute="bottom" constant="28" id="v05-6l-Bwb"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="7Om-mK-Qef" secondAttribute="trailing" constant="-16" id="xCU-qf-Uc8"/>
                         </constraints>
                     </view>
+                    <navigationItem key="navigationItem" title="Goal Set" id="krG-n1-xtP">
+                        <barButtonItem key="backBarButtonItem" systemItem="done" id="CHa-8k-oMb"/>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="pickerView" destination="7Om-mK-Qef" id="oXy-9N-lZe"/>
+                    </connections>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="bRU-ty-k4d" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="RYk-ZZ-jDI" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2063" y="1560"/>
+            <point key="canvasLocation" x="1079" y="1728"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="xWy-uf-uNH">
