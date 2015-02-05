@@ -157,14 +157,15 @@ class ViewController: UIViewController , CountDelegate {
             {(_,results,_) -> Void in
                 
                 if (results != nil) {
-                    let sample = results.first as HKQuantitySample
+                  if let sample : HKQuantitySample = results.first as? HKQuantitySample {
                     let quantity = sample.quantity.doubleValueForUnit(HKUnit.gramUnitWithMetricPrefix(.Kilo))
                     
                     dispatch_async(dispatch_get_main_queue(), {
-                        self.userWeight = Int(quantity)
-                        self.weightPicker.selectRow(self.selectedRowInComponent(0), inComponent: 0, animated: false)
-                        
+                      self.userWeight = Int(quantity)
+                      self.weightPicker.selectRow(self.selectedRowInComponent(0), inComponent: 0, animated: false)
+                      
                     })
+                  }
                 }
         })
         
