@@ -30,7 +30,7 @@ class ViewController: UIViewController , CountDelegate {
     var kgArray = [String]()
     
   
-    var healthStore : HKHealthStore = HKHealthStore()
+    var healthStore : HKHealthStore!// = HKHealthStore()
   
     var stepCounter : StepCounter?
     
@@ -54,11 +54,14 @@ class ViewController: UIViewController , CountDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
+      
+        var ad = UIApplication.sharedApplication().delegate as AppDelegate
+        healthStore = ad.healthStore;
         self.loadWeightArray()
 //        self.selectUserWeight()
         self.stepCounter = StepCounter(healthStore: healthStore, delegate: self);
       
-        healthStore.requestAuthorizationToShareTypes( dataTypesToWrite(), readTypes: dataTypesToRead(), completion: {
+      healthStore.requestAuthorizationToShareTypes(dataTypesToWrite(), readTypes: dataTypesToRead(), completion: {
         (success:Bool, error:NSError!) -> Void in
         //      if !success{
         //        var alert = UIAlertView(title: "Missed authorization", message: "The app cannot work without authorization for HealthKit. Closing", delegate: nil, cancelButtonTitle: nil, otherButtonTitles: "Close")
@@ -76,6 +79,7 @@ class ViewController: UIViewController , CountDelegate {
           
           self.selectUserWeight();
         }
+        
       })
         
     }
@@ -92,7 +96,6 @@ class ViewController: UIViewController , CountDelegate {
     }
     
     // weightPicker configuration
-    
     func pickerView(pickerView: UIPickerView,
         didSelectRow row: Int,
         inComponent component: Int) {
@@ -161,6 +164,7 @@ class ViewController: UIViewController , CountDelegate {
         return pos
     }
 
+
   
     /*
      Method called every time the step counter is updated.
@@ -206,7 +210,7 @@ class ViewController: UIViewController , CountDelegate {
         
         healthStore.executeQuery(sampleQuery)
     }
-    
+      
     func saveUserWeight(weight:Double) {
         let bmType = HKQuantityType.quantityTypeForIdentifier(HKQuantityTypeIdentifierBodyMass)
         let bmQuantity = HKQuantity(unit: HKUnit.gramUnit(), doubleValue:  weight * 1000 )
@@ -229,22 +233,21 @@ class ViewController: UIViewController , CountDelegate {
     }
   
   
-    private func dataTypesToRead() -> NSSet {
-        var typeIds = [HKQuantityTypeIdentifierHeight, HKQuantityTypeIdentifierBodyMass, HKQuantityTypeIdentifierDistanceWalkingRunning]
-        var typeBodyMass = HKObjectType.quantityTypeForIdentifier(HKQuantityTypeIdentifierBodyMass)
-        //    var type2 = HKObjectType.quantityTypeForIdentifier(HKQuantityTypeIdentifierHeight)
-        //    var type3 = HKObjectType.quantityTypeForIdentifier(HKQuantityTypeIdentifierDistanceWalkingRunning)
-        var typeStepCount = HKObjectType.quantityTypeForIdentifier(HKQuantityTypeIdentifierStepCount)
-        
-        return NSSet(objects: typeStepCount, typeBodyMass)
-        
-    }
+  private func dataTypesToRead() -> NSSet {
+    var typeIds = [HKQuantityTypeIdentifierHeight, HKQuantityTypeIdentifierBodyMass, HKQuantityTypeIdentifierDistanceWalkingRunning]
+    var typeBodyMass = HKObjectType.quantityTypeForIdentifier(HKQuantityTypeIdentifierBodyMass)
+    //    var type2 = HKObjectType.quantityTypeForIdentifier(HKQuantityTypeIdentifierHeight)
+    //    var type3 = HKObjectType.quantityTypeForIdentifier(HKQuantityTypeIdentifierDistanceWalkingRunning)
+    var typeStepCount = HKObjectType.quantityTypeForIdentifier(HKQuantityTypeIdentifierStepCount)
     
+    return NSSet(objects: typeStepCount, typeBodyMass)
+    
+  }
+
     private func dataTypesToWrite() -> NSSet {
         var typeBodyMass = HKObjectType.quantityTypeForIdentifier(HKQuantityTypeIdentifierBodyMass)
         
         return NSSet(objects: typeBodyMass)
-        
     }
 }
 
