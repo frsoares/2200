@@ -14,11 +14,15 @@ import HealthKit
 class ViewController: UIViewController , CountDelegate {
   
     // Progress goes from 0.0 to 1.0
-    var progress: Float = 0.0 {
+    var progress: Double = 0.0 {
       didSet{
         dispatch_async(dispatch_get_main_queue(), {
-          //self.progressView.progress = self.progress*10
-        })
+        
+          self.progressView.progress =  CGFloat(self.progress) * 10.0
+        
+        }
+        )
+        
       }
     }
     
@@ -149,7 +153,7 @@ class ViewController: UIViewController , CountDelegate {
         self.lblSteps.text = "\(newCount)"; self.lblSteps.setNeedsDisplay()
       })
       
-      self.progress = Float(newCount) / 10000.0 // hardcoded at 10000 steps for testing while we don't have everything set up.
+      self.progress = Double(newCount) / 10000.0 // hardcoded at 10000 steps for testing while we don't have everything set up.
       
 //      self.lblSteps.text = "\(newCount)"
     

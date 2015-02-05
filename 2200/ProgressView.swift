@@ -8,7 +8,7 @@
 
 import UIKit
 
-var progress: CGFloat = 2
+
 
 class ProgressView: UIView {
     
@@ -22,14 +22,22 @@ class ProgressView: UIView {
 //            propertyChangedListener(oldValue, ProgressView.progress)
 //        }
 //    }
-    
-    let rectPosition = 362 + (-progress * 36) 
-    let polyPosition1 = 340 + (-progress * 36)
-    let polyPosition2 = 362 + (-progress * 36)
+
+    var progress : CGFloat = CGFloat(0.0) {
+      didSet{
+        self.setNeedsDisplay()
+      }
+    }
+  
     
     
     override func drawRect(rect: CGRect) {
 
+      
+        var rectPosition = 362 + -(self.progress * 36)
+        var polyPosition1 = 340 + -(self.progress * 36)
+        var polyPosition2 = 362 + -(self.progress * 36)
+      
         //// Color Declarations
         let color = UIColor(red: 0.565, green: 0.937, blue: 0.478, alpha: 1.000)
 
