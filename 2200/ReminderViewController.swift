@@ -33,19 +33,24 @@ class ReminderViewController: UIViewController {
     
     @IBAction func datePickerAction(sender: AnyObject) {
       
-      UIApplication.sharedApplication().cancelAllLocalNotifications();
+      println("date picker called")
       
-      var selectedDate = datePicker.date;
       
-      var note = UILocalNotification()
-      
-      note.alertBody = ""
-      note.fireDate = selectedDate;
-      
-      note.repeatInterval = .CalendarUnitDay
-      
-      UIApplication.sharedApplication().scheduleLocalNotification(note);
+      if reminderSwitch.on{
+        UIApplication.sharedApplication().cancelAllLocalNotifications();
+        
+        var selectedDate = datePicker.date;
+        
+        var note = UILocalNotification()
+        
+        note.alertBody = "Hey! Just to remind you of walking your 10000 steps today! Check out how much you've walked already!"
+        note.fireDate = selectedDate;
+        
+        note.repeatInterval = .CalendarUnitDay
+        
+        UIApplication.sharedApplication().scheduleLocalNotification(note);
 
+      }
     }
 
     var hourArray = [String]()
