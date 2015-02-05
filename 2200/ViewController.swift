@@ -32,7 +32,7 @@ class ViewController: UIViewController , CountDelegate {
     var kgArray = [String]()
     
   
-    var healthStore : HKHealthStore = HKHealthStore()
+    var healthStore : HKHealthStore!// = HKHealthStore()
   
     var stepCounter : StepCounter?
     
@@ -60,11 +60,14 @@ class ViewController: UIViewController , CountDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
+      
+        var ad = UIApplication.sharedApplication().delegate as AppDelegate
+        healthStore = ad.healthStore;
         self.loadWeightArray()
 //        self.selectUserWeight()
         self.stepCounter = StepCounter(healthStore: healthStore, delegate: self);
       
-      healthStore.requestAuthorizationToShareTypes(nil, readTypes: dataTypesToRead(), completion: {
+      healthStore.requestAuthorizationToShareTypes(dataTypesToWrite(), readTypes: dataTypesToRead(), completion: {
         (success:Bool, error:NSError!) -> Void in
         //      if !success{
         //        var alert = UIAlertView(title: "Missed authorization", message: "The app cannot work without authorization for HealthKit. Closing", delegate: nil, cancelButtonTitle: nil, otherButtonTitles: "Close")
@@ -83,10 +86,6 @@ class ViewController: UIViewController , CountDelegate {
           self.selectUserWeight();
         }
         
-        
-        
-        
-        
       })
         
     }
@@ -103,7 +102,30 @@ class ViewController: UIViewController , CountDelegate {
     }
     
     // weightPicker configuration
+    func pickerView(pickerView: UIPickerView,
+        didSelectRow row: Int,
+        inComponent component: Int) {
+            
+            let alertController = UIAlertController(title: "Confirmation", message: "Confirm weight change?", preferredStyle: .Alert)
     
+            let cancelAction = UIAlertAction(title: "Cancel", style: .Cancel) { (action) in
+                //restore current weight
+                self.setWeightInUI(self.userWeight, animation:true)
+            }
+            alertController.addAction(cancelAction)
+            
+            let OKAction = UIAlertAction(title: "OK", style: .Default) { (action) in
+                println(row)
+                var newWeight = self.kgArray[row].toInt()
+                self.saveUserWeight(Double(newWeight!))
+            }
+            alertController.addAction(OKAction)
+            
+            self.presentViewController(alertController, animated: true) {
+                
+            }
+}
+
     func numberOfComponentsInPickerView(pickerView: UIPickerView!) -> Int {
         return 1
     }
@@ -186,9 +208,7 @@ class ViewController: UIViewController , CountDelegate {
                     let quantity = sample.quantity.doubleValueForUnit(HKUnit.gramUnitWithMetricPrefix(.Kilo))
                     
                     dispatch_async(dispatch_get_main_queue(), {
-                      self.userWeight = Int(quantity)
-                      self.weightPicker.selectRow(self.selectedRowInComponent(0), inComponent: 0, animated: false)
-                      
+                        self.setWeightInUI(Int(quantity))
                     })
                   }
                 }
@@ -196,13 +216,31 @@ class ViewController: UIViewController , CountDelegate {
         
         healthStore.executeQuery(sampleQuery)
     }
+      
+    func saveUserWeight(weight:Double) {
+        let bmType = HKQuantityType.quantityTypeForIdentifier(HKQuantityTypeIdentifierBodyMass)
+        let bmQuantity = HKQuantity(unit: HKUnit.gramUnit(), doubleValue:  weight * 1000 )
+        let sample = HKQuantitySample(type: bmType, quantity: bmQuantity, startDate: NSDate(), endDate: NSDate())
+        
+        
+        self.healthStore.saveObject(sample, withCompletion: {
+            (success, error) in
+            if !success {
+                let alertController = UIAlertController(title: "Error", message: "Error saving data on HealthKit", preferredStyle: .Alert)
+            } else {
+                self.userWeight = Int(weight)
+            }
+        })
+    }
+    
+    func setWeightInUI(weight:Int, animation: Bool = false) {
+        self.userWeight = weight
+        self.weightPicker.selectRow(self.selectedRowInComponent(weight), inComponent: 0, animated: animation)
+    }
   
   
   private func dataTypesToRead() -> NSSet {
-    
     var typeIds = [HKQuantityTypeIdentifierHeight, HKQuantityTypeIdentifierBodyMass, HKQuantityTypeIdentifierDistanceWalkingRunning]
-    
-    
     var typeBodyMass = HKObjectType.quantityTypeForIdentifier(HKQuantityTypeIdentifierBodyMass)
     //    var type2 = HKObjectType.quantityTypeForIdentifier(HKQuantityTypeIdentifierHeight)
     //    var type3 = HKObjectType.quantityTypeForIdentifier(HKQuantityTypeIdentifierDistanceWalkingRunning)
@@ -212,5 +250,11 @@ class ViewController: UIViewController , CountDelegate {
     
   }
 
+
+    private func dataTypesToWrite() -> NSSet {
+        var typeBodyMass = HKObjectType.quantityTypeForIdentifier(HKQuantityTypeIdentifierBodyMass)
+        
+        return NSSet(objects: typeBodyMass)
+    }
 }
 
