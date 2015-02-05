@@ -8,6 +8,8 @@
 
 import UIKit
 
+import HealthKit
+
 var items: [(date: String, steps: String)] = [("27/01/15" , "4500 Steps"), ("28/01/15" , "4500 Steps"), ("29/01/15", "4500 Steps")]
 
 
@@ -15,9 +17,18 @@ class HistoryTableViewController: UIViewController, UITableViewDelegate, UITable
     
     @IBOutlet var historyTable: UITableView!
     
-    
+  
+    var healthStore : HKHealthStore!
+  
     override func viewDidLoad() {
         super.viewDidLoad()
+      
+      
+      
+//        UIApplication.sharedApplication().delegate
+      
+      var ad = UIApplication.sharedApplication().delegate as AppDelegate
+      healthStore = ad.healthStore;
     }
 
     override func didReceiveMemoryWarning() {

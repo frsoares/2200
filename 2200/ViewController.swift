@@ -30,7 +30,7 @@ class ViewController: UIViewController , CountDelegate {
     var kgArray = [String]()
     
   
-    var healthStore : HKHealthStore = HKHealthStore()
+    var healthStore : HKHealthStore!// = HKHealthStore()
   
     var stepCounter : StepCounter?
     
@@ -54,6 +54,9 @@ class ViewController: UIViewController , CountDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
+      
+        var ad = UIApplication.sharedApplication().delegate as AppDelegate
+        healthStore = ad.healthStore;
         self.loadWeightArray()
 //        self.selectUserWeight()
         self.stepCounter = StepCounter(healthStore: healthStore, delegate: self);
@@ -76,10 +79,6 @@ class ViewController: UIViewController , CountDelegate {
           
           self.selectUserWeight();
         }
-        
-        
-        
-        
         
       })
         
