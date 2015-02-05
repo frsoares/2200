@@ -81,6 +81,10 @@ class HistoryTableViewController: UIViewController, UITableViewDelegate, UITable
           
         }
         
+        dispatch_async(dispatch_get_main_queue(), {
+            self.historyTable.reloadData();
+        })
+        
       }
       
     }
