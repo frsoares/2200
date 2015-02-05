@@ -221,7 +221,9 @@
                                             </subviews>
                                         </tableViewCellContentView>
                                         <connections>
-                                            <segue destination="aK1-Lx-UnT" kind="modal" id="tWt-5x-GBz"/>
+                                            <segue destination="PkZ-uF-SMe" kind="popover" popoverAnchorView="j8e-De-thA" id="TT2-9u-jnB">
+                                                <popoverArrowDirection key="popoverArrowDirection" up="YES" down="YES" left="YES" right="YES"/>
+                                            </segue>
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="10" textLabel="Elx-hu-6cb" detailTextLabel="er8-7P-fql" style="IBUITableViewCellStyleValue1" id="VzO-Tl-O3N">
@@ -272,7 +274,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <pickerView contentMode="scaleToFill" showsSelectionIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="89G-Uv-6lb">
+                            <pickerView contentMode="scaleToFill" misplaced="YES" showsSelectionIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="89G-Uv-6lb">
                                 <rect key="frame" x="0.0" y="114" width="320" height="162"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="320" id="Od7-gZ-bDl"/>
@@ -299,7 +301,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tyU-zb-KdS" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1004" y="1743"/>
+            <point key="canvasLocation" x="634" y="1728"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="41z-Rp-be3">
@@ -362,28 +364,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hPN-12-iLL" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-248" y="1853"/>
-        </scene>
-        <!--Navigation Controller-->
-        <scene sceneID="Ptw-ED-IFn">
-            <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="aK1-Lx-UnT" sceneMemberID="viewController">
-                    <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="SfL-ts-0WI">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <nil name="viewControllers"/>
-                    <toolbar key="toolbar" opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="FPr-36-Dvx">
-                        <autoresizingMask key="autoresizingMask"/>
-                        <color key="tintColor" red="0.3294117647" green="0.68235294120000001" blue="0.2274509804" alpha="1" colorSpace="calibratedRGB"/>
-                    </toolbar>
-                    <connections>
-                        <segue destination="PkZ-uF-SMe" kind="relationship" relationship="rootViewController" id="CEM-A7-ugs"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="mNa-v1-cEk" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="625" y="1743"/>
         </scene>
     </scenes>
     <resources>
