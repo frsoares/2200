@@ -14,6 +14,7 @@
 		1F843F971A81302500E1DFEA /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1F843F951A81302500E1DFEA /* LaunchScreen.xib */; };
 		1F843FA31A81302500E1DFEA /* _200Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F843FA21A81302500E1DFEA /* _200Tests.swift */; };
 		1FC274801A8265EE00562C02 /* ProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FC2747F1A8265EE00562C02 /* ProgressView.swift */; };
+		1FC274821A838C6200562C02 /* HistoryTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FC274811A838C6200562C02 /* HistoryTableViewController.swift */; };
 		DB3834BC1A8244E200870033 /* HealthKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DB3834BB1A8244E200870033 /* HealthKit.framework */; };
 		DB3834C01A82534C00870033 /* StepCounter.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB3834BF1A82534C00870033 /* StepCounter.swift */; };
 		F2408B111A825E1900C461A6 /* StepToCalorieConverter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2408B101A825E1900C461A6 /* StepToCalorieConverter.swift */; };
@@ -43,6 +44,7 @@
 		1F843FA11A81302500E1DFEA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		1F843FA21A81302500E1DFEA /* _200Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = _200Tests.swift; sourceTree = "<group>"; };
 		1FC2747F1A8265EE00562C02 /* ProgressView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProgressView.swift; sourceTree = "<group>"; };
+		1FC274811A838C6200562C02 /* HistoryTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HistoryTableViewController.swift; sourceTree = "<group>"; };
 		DB3834BB1A8244E200870033 /* HealthKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = HealthKit.framework; path = System/Library/Frameworks/HealthKit.framework; sourceTree = SDKROOT; };
 		DB3834BD1A8244E200870033 /* 2200.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = 2200.entitlements; sourceTree = "<group>"; };
 		DB3834BF1A82534C00870033 /* StepCounter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StepCounter.swift; sourceTree = "<group>"; };
@@ -97,6 +99,7 @@
 				1F843F8C1A81302500E1DFEA /* AppDelegate.swift */,
 				1F843F8E1A81302500E1DFEA /* ViewController.swift */,
 				1F843F901A81302500E1DFEA /* Main.storyboard */,
+				1FC274811A838C6200562C02 /* HistoryTableViewController.swift */,
 				1FC2747F1A8265EE00562C02 /* ProgressView.swift */,
 				1F843F931A81302500E1DFEA /* Images.xcassets */,
 				1F843F951A81302500E1DFEA /* LaunchScreen.xib */,
@@ -247,6 +250,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1FC274821A838C6200562C02 /* HistoryTableViewController.swift in Sources */,
 				1F843F8F1A81302500E1DFEA /* ViewController.swift in Sources */,
 				F2408B111A825E1900C461A6 /* StepToCalorieConverter.swift in Sources */,
 				1F843F8D1A81302500E1DFEA /* AppDelegate.swift in Sources */,
