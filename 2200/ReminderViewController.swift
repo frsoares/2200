@@ -15,13 +15,37 @@ class ReminderViewController: UIViewController {
     }
     @IBOutlet weak var reminderSwitch: UISwitch!
     
-    
     @IBAction func toggleSwitch(sender: AnyObject) {
+      
+      if reminderSwitch.on {
+      
+        datePickerValueChanged(reminderSwitch);
+        
+      }
+      else{
+        
+        UIApplication.sharedApplication().cancelAllLocalNotifications()
+      
+      }
     }
     
     @IBOutlet weak var datePicker: UIDatePicker!
     
     @IBAction func datePickerAction(sender: AnyObject) {
+      
+      UIApplication.sharedApplication().cancelAllLocalNotifications();
+      
+      var selectedDate = datePicker.date;
+      
+      var note = UILocalNotification()
+      
+      note.alertBody = ""
+      note.fireDate = selectedDate;
+      
+      note.repeatInterval = .CalendarUnitDay
+      
+      UIApplication.sharedApplication().scheduleLocalNotification(note);
+
     }
 
     var hourArray = [String]()
