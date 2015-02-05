@@ -1,5 +1,5 @@
 //
-//  GoalSetViewController.swift
+//  ReminderViewController.swift
 //  2200
 //
 //  Created by Eduardo Borges Pinto Osório on 2/5/15.
@@ -8,17 +8,14 @@
 
 import UIKit
 
-class GoalSetViewController: UIViewController {
+class ReminderViewController: UIViewController {
 
-    @IBOutlet weak var goalPicker: UIPickerView!
-    
-    
+    @IBOutlet weak var pickerView: UIPickerView!
     @IBAction func doneButton(sender: AnyObject) {
         self.dismissViewControllerAnimated(true, completion: nil)
     }
-  
-    
     var kgArray = [String]()
+
     
     let defaultUserWeight = 65
     
@@ -88,8 +85,6 @@ class GoalSetViewController: UIViewController {
         return pos
     }
     
-
-
 
     /*
     // MARK: - Navigation
