@@ -32,8 +32,7 @@ class ViewController: UIViewController , CountDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
-  
-  
+
         self.stepCounter = StepCounter(healthStore: healthStore, delegate: self);
       
     }
@@ -91,8 +90,10 @@ class ViewController: UIViewController , CountDelegate {
      Method called every time the step counter is updated.
     */
     func countUpdated(newCount: Int) {
-  
-      self.lblGoal.text = "\(newCount)"
+
+      dispatch_async(dispatch_get_main_queue(), { self.lblSteps.text = "\(newCount)"; self.lblSteps.setNeedsDisplay() })
+      
+//      self.lblSteps.text = "\(newCount)"
     
     }
     
