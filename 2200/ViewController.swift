@@ -15,13 +15,19 @@ class ViewController: UIViewController , CountDelegate {
   
     var progress: Int = 0
     
-    var kgArray = ["81","82","83","84","85"]
+    var kgArray = [String]()
     
     var greenColor = UIColor(red: CGFloat(84.0/255.0), green: CGFloat(174.0/255.0), blue: CGFloat(58.0/255.0), alpha: CGFloat(1.0))
   
     var healthStore : HKHealthStore = HKHealthStore()
   
     var stepCounter : StepCounter?
+    
+    let defaultUserWeight = 65
+    
+    let maxUserWeight = 150
+    
+    var userWeight = 65
   
     @IBOutlet weak var weightPicker: UIPickerView!
   
@@ -29,12 +35,14 @@ class ViewController: UIViewController , CountDelegate {
     
     @IBOutlet weak var lblSteps: UILabel!
     
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
-
+        self.loadWeightArray()
+        self.selectUserWeight()
         self.stepCounter = StepCounter(healthStore: healthStore, delegate: self);
-      
+        
     }
   
     override func viewDidAppear(animated: Bool) {
@@ -81,7 +89,17 @@ class ViewController: UIViewController , CountDelegate {
     }
     
     func selectedRowInComponent(component: Int) -> Int {
-        return 2
+        var pos = -1
+        var count = 0
+        
+        for (var i = defaultUserWeight; i <= maxUserWeight && pos == -1 ; i++, count++)
+        {
+            if (i == userWeight)
+            {
+                pos = count
+            }
+        }
+        return pos
     }
 
 
@@ -97,5 +115,35 @@ class ViewController: UIViewController , CountDelegate {
     
     }
     
+    func loadWeightArray() {
+        for (var i = defaultUserWeight; i <= maxUserWeight; i++)
+        {
+            kgArray.append(String(i));
+        }
+    }
+    
+    func selectUserWeight() {
+        let past : NSDate = NSDate.distantPast() as NSDate
+        let now = NSDate()
+        let mostRecentPredicate = HKQuery.predicateForSamplesWithStartDate(past, endDate: now, options: HKQueryOptions.None)
+        let sortDescriptor = NSSortDescriptor(key: HKSampleSortIdentifierStartDate, ascending: false);
+        let idWeight = HKObjectType.quantityTypeForIdentifier(HKQuantityTypeIdentifierBodyMass)
+        let sampleQuery = HKSampleQuery(sampleType: idWeight, predicate: mostRecentPredicate, limit: 0, sortDescriptors: [sortDescriptor], resultsHandler:
+            {(_,results,_) -> Void in
+                
+                if (results != nil) {
+                    let sample = results.first as HKQuantitySample
+                    let quantity = sample.quantity.doubleValueForUnit(HKUnit.gramUnitWithMetricPrefix(.Kilo))
+                    
+                    dispatch_async(dispatch_get_main_queue(), {
+                        self.userWeight = Int(quantity)
+                        self.weightPicker.selectRow(self.selectedRowInComponent(0), inComponent: 0, animated: false)
+                        
+                    })
+                }
+        })
+        
+        healthStore.executeQuery(sampleQuery)
+    }
 }
 
