@@ -203,7 +203,7 @@
         <!--Tutorial-->
         <scene sceneID="2RY-g3-VWe">
             <objects>
-                <viewController title="Tutorial" id="lNb-WR-WgL" customClass="TutorialViewController" sceneMemberID="viewController">
+                <viewController title="Tutorial" id="lNb-WR-WgL" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="cNV-3B-Zpw"/>
                         <viewControllerLayoutGuide type="bottom" id="Hpy-kY-H49"/>
@@ -212,14 +212,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <visualEffectView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="uWc-hL-2RZ">
-                                <rect key="frame" x="0.0" y="0.0" width="332" height="568"/>
-                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="0hy-jF-ehs">
-                                    <rect key="frame" x="0.0" y="0.0" width="332" height="568"/>
-                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                </view>
-                                <blurEffect style="light"/>
-                            </visualEffectView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="tutorial" translatesAutoresizingMaskIntoConstraints="NO" id="NHR-ub-86O">
                                 <rect key="frame" x="25" y="55" width="270" height="480"/>
                                 <constraints>
@@ -253,7 +245,7 @@
         <!--Tutorial-->
         <scene sceneID="geO-ca-Sgt">
             <objects>
-                <viewController title="Tutorial" id="SIH-4C-s7u" customClass="TutorialViewController" sceneMemberID="viewController">
+                <viewController title="Tutorial" id="SIH-4C-s7u" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="LNd-KT-ipm"/>
                         <viewControllerLayoutGuide type="bottom" id="nSG-Wc-qPP"/>
@@ -262,38 +254,28 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <visualEffectView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Ihd-PK-HNT">
-                                <rect key="frame" x="0.0" y="0.0" width="332" height="568"/>
-                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="76e-Rd-fh8">
-                                    <rect key="frame" x="0.0" y="0.0" width="332" height="568"/>
-                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                    <subviews>
-                                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aVv-sB-CDR">
-                                            <rect key="frame" x="45" y="334" width="242" height="31"/>
-                                            <state key="normal">
-                                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                            </state>
-                                            <connections>
-                                                <segue destination="Ugc-cx-PAH" kind="modal" id="DGI-ff-sO3"/>
-                                            </connections>
-                                        </button>
-                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="authorize" translatesAutoresizingMaskIntoConstraints="NO" id="nEB-37-gB8">
-                                            <rect key="frame" x="31" y="184" width="270" height="213"/>
-                                            <constraints>
-                                                <constraint firstAttribute="width" constant="270" id="ji0-I9-J3V"/>
-                                            </constraints>
-                                        </imageView>
-                                    </subviews>
-                                    <constraints>
-                                        <constraint firstAttribute="trailing" secondItem="nEB-37-gB8" secondAttribute="trailing" constant="31" id="1eW-CH-SeG"/>
-                                        <constraint firstItem="nEB-37-gB8" firstAttribute="top" secondItem="76e-Rd-fh8" secondAttribute="top" constant="184" id="5Gz-lY-M8V"/>
-                                        <constraint firstItem="nEB-37-gB8" firstAttribute="leading" secondItem="76e-Rd-fh8" secondAttribute="leading" constant="31" id="aUU-Jk-PBG"/>
-                                    </constraints>
-                                </view>
-                                <blurEffect style="light"/>
-                            </visualEffectView>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZTI-d4-rUi">
+                                <rect key="frame" x="39" y="328" width="242" height="31"/>
+                                <state key="normal">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <segue destination="Ugc-cx-PAH" kind="modal" id="q5D-wN-k5M"/>
+                                </connections>
+                            </button>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="authorize" translatesAutoresizingMaskIntoConstraints="NO" id="yqE-mu-YV1">
+                                <rect key="frame" x="25" y="168" width="270" height="213"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="270" id="ieh-fs-pdy"/>
+                                </constraints>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="yqE-mu-YV1" firstAttribute="leading" secondItem="TuS-CW-2NB" secondAttribute="leadingMargin" constant="9" id="b5f-Qt-s1H"/>
+                            <constraint firstItem="yqE-mu-YV1" firstAttribute="top" secondItem="LNd-KT-ipm" secondAttribute="bottom" constant="158" id="cxM-cM-vMd"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="yqE-mu-YV1" secondAttribute="trailing" constant="9" id="vDR-iW-WJn"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="FXi-43-Md2"/>
                 </viewController>
@@ -544,35 +526,28 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <visualEffectView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="CwZ-vl-OBK">
-                                <rect key="frame" x="0.0" y="0.0" width="332" height="568"/>
-                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="Of5-PI-CzU">
-                                    <rect key="frame" x="0.0" y="0.0" width="332" height="568"/>
-                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                    <subviews>
-                                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ltR-Bb-HJH">
-                                            <rect key="frame" x="41" y="328" width="242" height="31"/>
-                                            <state key="normal">
-                                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                            </state>
-                                        </button>
-                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="authorize" translatesAutoresizingMaskIntoConstraints="NO" id="Ptu-m1-PpL">
-                                            <rect key="frame" x="31" y="184" width="270" height="213"/>
-                                            <constraints>
-                                                <constraint firstAttribute="width" constant="270" id="6gf-Pf-yqx"/>
-                                            </constraints>
-                                        </imageView>
-                                    </subviews>
-                                    <constraints>
-                                        <constraint firstItem="Ptu-m1-PpL" firstAttribute="leading" secondItem="Of5-PI-CzU" secondAttribute="leading" constant="31" id="3RP-lS-V8i"/>
-                                        <constraint firstAttribute="trailing" secondItem="Ptu-m1-PpL" secondAttribute="trailing" constant="31" id="yub-bS-pPY"/>
-                                        <constraint firstItem="Ptu-m1-PpL" firstAttribute="top" secondItem="Of5-PI-CzU" secondAttribute="top" constant="184" id="zKT-za-SNc"/>
-                                    </constraints>
-                                </view>
-                                <blurEffect style="light"/>
-                            </visualEffectView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="weight" translatesAutoresizingMaskIntoConstraints="NO" id="mN3-24-UIK">
+                                <rect key="frame" x="25" y="178" width="270" height="213"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="270" id="Q1i-g1-sVv"/>
+                                </constraints>
+                            </imageView>
+                            <pickerView contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="EcV-Tq-9On" customClass="weightPicker">
+                                <rect key="frame" x="-6" y="203" width="332" height="162"/>
+                            </pickerView>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6mV-nd-10E">
+                                <rect key="frame" x="39" y="269" width="242" height="31"/>
+                                <state key="normal">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailingMargin" secondItem="mN3-24-UIK" secondAttribute="trailing" constant="9" id="JBD-Jd-SYC"/>
+                            <constraint firstItem="mN3-24-UIK" firstAttribute="leading" secondItem="7cd-1l-vYU" secondAttribute="leadingMargin" constant="9" id="b4s-2O-Hdq"/>
+                            <constraint firstItem="mN3-24-UIK" firstAttribute="top" secondItem="QGe-lt-wr5" secondAttribute="bottom" constant="158" id="kr9-iI-GTl"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="okp-QF-8QA"/>
                 </viewController>
@@ -585,6 +560,7 @@
         <image name="authorize" width="323" height="213"/>
         <image name="goalbg" width="375" height="362"/>
         <image name="tutorial" width="323" height="597"/>
+        <image name="weight" width="323" height="337"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
