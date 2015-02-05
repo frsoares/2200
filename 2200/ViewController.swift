@@ -6,8 +6,9 @@
 //  Copyright (c) 2015 Eduardo Borges Pinto Osório. All rights reserved.
 //
 
-import UIKit
+var greenColor = UIColor(red: CGFloat(84.0/255.0), green: CGFloat(174.0/255.0), blue: CGFloat(58.0/255.0), alpha: CGFloat(1.0))
 
+import UIKit
 
 import HealthKit
 
@@ -17,7 +18,6 @@ class ViewController: UIViewController , CountDelegate {
     
     var kgArray = [String]()
     
-    var greenColor = UIColor(red: CGFloat(84.0/255.0), green: CGFloat(174.0/255.0), blue: CGFloat(58.0/255.0), alpha: CGFloat(1.0))
   
     var healthStore : HKHealthStore = HKHealthStore()
   

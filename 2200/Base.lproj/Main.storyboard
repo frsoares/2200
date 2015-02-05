@@ -278,7 +278,8 @@
                                     <constraint firstAttribute="width" constant="320" id="Od7-gZ-bDl"/>
                                 </constraints>
                                 <connections>
-                                    <outlet property="delegate" destination="vXZ-lx-hvc" id="s7V-5R-BWv"/>
+                                    <outlet property="dataSource" destination="PkZ-uF-SMe" id="HlA-TA-QXI"/>
+                                    <outlet property="delegate" destination="PkZ-uF-SMe" id="xjQ-db-Wio"/>
                                 </connections>
                             </pickerView>
                         </subviews>
@@ -290,7 +291,7 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Goal Set" id="fNh-HR-oRD">
-                        <barButtonItem key="backBarButtonItem" title="Back" id="EcX-ix-3k8"/>
+                        <barButtonItem key="backBarButtonItem" systemItem="done" id="log-Ee-HnN"/>
                     </navigationItem>
                     <connections>
                         <outlet property="goalPicker" destination="89G-Uv-6lb" id="tWa-yL-0ou"/>
@@ -298,7 +299,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tyU-zb-KdS" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1073" y="1743"/>
+            <point key="canvasLocation" x="1004" y="1743"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="41z-Rp-be3">
@@ -382,7 +383,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="mNa-v1-cEk" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="632" y="1743"/>
+            <point key="canvasLocation" x="625" y="1743"/>
         </scene>
     </scenes>
     <resources>
