@@ -23,21 +23,25 @@ class ReminderViewController: UIViewController {
     
     @IBAction func datePickerAction(sender: AnyObject) {
     }
-    
-    
-    var kgArray = [String]()
+
+    var hourArray = [String]()
+
 
     
     let defaultUserWeight = 65
     
-    let maxUserWeight = 150
+    let maxUserWeight = 24
     
     var userWeight = 65
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
+      // Do any additional setup after loading the view.
+
+       datePicker.datePickerMode = UIDatePickerMode.Time;
+      
+      
     }
 
     override func didReceiveMemoryWarning() {
@@ -45,58 +49,25 @@ class ReminderViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    func loadWeightArray() {
-        for (var i = defaultUserWeight; i <= maxUserWeight; i++)
-        {
-            kgArray.append(String(i));
-        }
-    }
+  @IBAction func datePickerValueChanged(sender:AnyObject){
     
-    func numberOfComponentsInPickerView(pickerView: UIPickerView!) -> Int {
-        return 1
-    }
+    UIApplication.sharedApplication().cancelAllLocalNotifications();
     
-    func pickerView(pickerView: UIPickerView!,
-        numberOfRowsInComponent component: Int) -> Int {
-            return kgArray.count
-    }
+    var selectedDate = datePicker.date;
     
+    var note = UILocalNotification()
     
-    func pickerView(pickerView: UIPickerView!, titleForRow row: Int, forComponent component: Int) -> String {
-        return kgArray[row]
-    }
+    note.alertBody = ""
+    note.fireDate = selectedDate;
     
+    note.repeatInterval = .CalendarUnitDay
     
-    func pickerView(pickerView: UIPickerView, viewForRow row: Int, forComponent component: Int, reusingView view: UIView!) -> UIView
-    {
-        var pickerLabel = UILabel()
-        pickerLabel.textColor = greenColor
-        pickerLabel.text = kgArray[row]
-        // pickerLabel.font = UIFont(name: pickerLabel.font.fontName, size: 15)
-        pickerLabel.font = UIFont(name: "HelveticaNeue-Light", size: 30) // In this use your custom font
-        pickerLabel.textAlignment = NSTextAlignment.Center
-        return pickerLabel
-    }
+    UIApplication.sharedApplication().scheduleLocalNotification(note);
     
-    func pickerView(pickerView: UIPickerView, rowHeightForComponent component: Int) -> CGFloat {
-        return 36.0
-    }
-    
-    func selectedRowInComponent(component: Int) -> Int {
-        var pos = -1
-        var count = 0
-        
-        for (var i = defaultUserWeight; i <= maxUserWeight && pos == -1 ; i++, count++)
-        {
-            if (i == userWeight)
-            {
-                pos = count
-            }
-        }
-        return pos
-    }
-    
-
+  }
+  
+  
+  
     /*
     // MARK: - Navigation
 

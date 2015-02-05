@@ -91,28 +91,30 @@ class StepCounter {
         let anchorQuery = HKAnchoredObjectQuery(type: idSteps, predicate: mostRecentPredicate, anchor: self.anchor, limit: 0, completionHandler: {(_, results, newAnchor,_) -> Void in
           if (results != nil) {
             
-            self.anchor = newAnchor
+            if(newAnchor > self.anchor){
             
-            var sum:Int = 0
-            
-            var unit = HKUnit(fromString: "count")
-            
-            for quantitySample : HKQuantitySample in results as [HKQuantitySample]! {
-              var quantity = quantitySample.quantity
-              sum += Int(quantity.doubleValueForUnit(unit))
+              self.anchor = newAnchor
+              
+              var sum:Int = 0
+              
+              var unit = HKUnit(fromString: "count")
+              
+              for quantitySample : HKQuantitySample in results as [HKQuantitySample]! {
+                var quantity = quantitySample.quantity
+                sum += Int(quantity.doubleValueForUnit(unit))
+              }
+              
+              self.stepCount += sum
+              
+              //        if let quantity : HKQuantity! = statistics.sumQuantity(){
+              //            if let q = quantity {
+              //                var unit = HKUnit(fromString: "count")
+              //                self.stepCount = Int(q.doubleValueForUnit(unit));
+              //            }
+              //        }
+              
+              
             }
-            
-            self.stepCount += sum
-            
-            //        if let quantity : HKQuantity! = statistics.sumQuantity(){
-            //            if let q = quantity {
-            //                var unit = HKUnit(fromString: "count")
-            //                self.stepCount = Int(q.doubleValueForUnit(unit));
-            //            }
-            //        }
-            
-            
-            
             
             
           }

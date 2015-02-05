@@ -20,10 +20,14 @@ class HistoryTableViewController: UIViewController, UITableViewDelegate, UITable
   
     var healthStore : HKHealthStore!
   
+    var form = NSDateFormatter();
+  
+  
     override func viewDidLoad() {
         super.viewDidLoad()
-      
-      
+  
+      form.dateStyle=NSDateFormatterStyle.LongStyle
+      form.timeStyle=NSDateFormatterStyle.NoStyle;
       
 //        UIApplication.sharedApplication().delegate
       
@@ -76,10 +80,14 @@ class HistoryTableViewController: UIViewController, UITableViewDelegate, UITable
           if let quantity = i.sumQuantity(){
             let value = Int(quantity.doubleValueForUnit(unit))
             let day = i.startDate;
-            items += [("\(day)", "\(value)")]
+            items += [("\(self.form.stringFromDate(day))", "\(value)")]
           }
           
         }
+        
+        dispatch_async(dispatch_get_main_queue(), {
+            self.historyTable.reloadData();
+        })
         
       }
       
