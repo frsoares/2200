@@ -350,7 +350,7 @@
                                 </constraints>
                                 <items>
                                     <navigationItem title="Title" id="umI-Tt-PVK">
-                                        <barButtonItem key="leftBarButtonItem" style="plain" id="XQC-h2-RhB">
+                                        <barButtonItem key="leftBarButtonItem" style="done" id="XQC-h2-RhB">
                                             <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="DpY-Ve-R6Q">
                                                 <rect key="frame" x="16" y="15" width="37" height="30"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -372,8 +372,8 @@
                                     <constraint firstAttribute="width" constant="49" id="vGP-pt-14u"/>
                                 </constraints>
                             </switch>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Daily reminder" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="q7c-X2-q9y">
-                                <rect key="frame" x="16" y="80" width="110" height="21"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Daily reminder" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="q7c-X2-q9y">
+                                <rect key="frame" x="16" y="77" width="166" height="21"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="21" id="Ode-qh-Zdv"/>
                                     <constraint firstAttribute="width" constant="166" id="TP5-KP-Srh"/>
