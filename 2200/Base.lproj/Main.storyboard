@@ -182,6 +182,7 @@
                     <connections>
                         <outlet property="lblGoal" destination="EMA-ct-ykQ" id="6EK-34-JRF"/>
                         <outlet property="lblSteps" destination="K5x-h7-0s7" id="TF9-4N-akh"/>
+                        <outlet property="progressView" destination="NEh-sb-uKr" id="EPV-js-S5n"/>
                         <outlet property="weightPicker" destination="MLa-IX-9iY" id="ZMh-AB-6zZ"/>
                     </connections>
                 </viewController>
@@ -262,7 +263,7 @@
         <!--Goal Set-->
         <scene sceneID="O0A-Zr-rTN">
             <objects>
-                <viewController storyboardIdentifier="goal" id="PkZ-uF-SMe" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="goal" id="PkZ-uF-SMe" customClass="GoalSetViewController" customModule="_200" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="QhU-KN-lzA"/>
                         <viewControllerLayoutGuide type="bottom" id="zik-ys-bOe"/>
@@ -271,7 +272,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <pickerView contentMode="scaleToFill" ambiguous="YES" misplaced="YES" showsSelectionIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="89G-Uv-6lb">
+                            <pickerView contentMode="scaleToFill" showsSelectionIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="89G-Uv-6lb">
                                 <rect key="frame" x="0.0" y="114" width="320" height="162"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="320" id="Od7-gZ-bDl"/>
@@ -283,6 +284,7 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="89G-Uv-6lb" firstAttribute="top" secondItem="QhU-KN-lzA" secondAttribute="bottom" constant="70" id="0GF-71-NtS"/>
                             <constraint firstAttribute="trailingMargin" secondItem="89G-Uv-6lb" secondAttribute="trailing" constant="-16" id="IiR-hg-mgf"/>
                             <constraint firstItem="89G-Uv-6lb" firstAttribute="leading" secondItem="wW4-pV-fpJ" secondAttribute="leadingMargin" constant="-16" id="eEY-ph-3ID"/>
                         </constraints>
@@ -290,6 +292,9 @@
                     <navigationItem key="navigationItem" title="Goal Set" id="fNh-HR-oRD">
                         <barButtonItem key="backBarButtonItem" title="Back" id="EcX-ix-3k8"/>
                     </navigationItem>
+                    <connections>
+                        <outlet property="goalPicker" destination="89G-Uv-6lb" id="tWa-yL-0ou"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tyU-zb-KdS" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
