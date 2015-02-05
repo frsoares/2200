@@ -173,12 +173,12 @@ class StepCounter {
     var typeIds = [HKQuantityTypeIdentifierHeight, HKQuantityTypeIdentifierBodyMass, HKQuantityTypeIdentifierDistanceWalkingRunning]
     
     
-    //    var type1 = HKObjectType.quantityTypeForIdentifier(HKQuantityTypeIdentifierBodyMass)
+    var typeBodyMass = HKObjectType.quantityTypeForIdentifier(HKQuantityTypeIdentifierBodyMass)
     //    var type2 = HKObjectType.quantityTypeForIdentifier(HKQuantityTypeIdentifierHeight)
     //    var type3 = HKObjectType.quantityTypeForIdentifier(HKQuantityTypeIdentifierDistanceWalkingRunning)
     var typeStepCount = HKObjectType.quantityTypeForIdentifier(HKQuantityTypeIdentifierStepCount)
     
-    return NSSet(objects: typeStepCount)
+    return NSSet(objects: typeStepCount, typeBodyMass)
     
   }
   
