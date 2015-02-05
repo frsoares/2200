@@ -182,6 +182,7 @@
                     <connections>
                         <outlet property="lblGoal" destination="EMA-ct-ykQ" id="6EK-34-JRF"/>
                         <outlet property="lblSteps" destination="K5x-h7-0s7" id="TF9-4N-akh"/>
+                        <outlet property="progressView" destination="NEh-sb-uKr" id="EPV-js-S5n"/>
                         <outlet property="weightPicker" destination="MLa-IX-9iY" id="ZMh-AB-6zZ"/>
                     </connections>
                 </viewController>
@@ -220,7 +221,7 @@
                                             </subviews>
                                         </tableViewCellContentView>
                                         <connections>
-                                            <segue destination="PkZ-uF-SMe" kind="modal" id="tWt-5x-GBz"/>
+                                            <segue destination="aK1-Lx-UnT" kind="modal" id="tWt-5x-GBz"/>
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="10" textLabel="Elx-hu-6cb" detailTextLabel="er8-7P-fql" style="IBUITableViewCellStyleValue1" id="VzO-Tl-O3N">
@@ -259,10 +260,10 @@
             </objects>
             <point key="canvasLocation" x="625.60000000000002" y="1171.5"/>
         </scene>
-        <!--View Controller-->
+        <!--Goal Set-->
         <scene sceneID="O0A-Zr-rTN">
             <objects>
-                <viewController id="PkZ-uF-SMe" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="goal" id="PkZ-uF-SMe" customClass="GoalSetViewController" customModule="_200" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="QhU-KN-lzA"/>
                         <viewControllerLayoutGuide type="bottom" id="zik-ys-bOe"/>
@@ -271,12 +272,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bN7-zv-fdZ">
-                                <rect key="frame" x="0.0" y="20" width="320" height="44"/>
-                                <items>
-                                    <barButtonItem systemItem="done" id="GhL-c2-e04"/>
-                                </items>
-                            </toolbar>
                             <pickerView contentMode="scaleToFill" showsSelectionIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="89G-Uv-6lb">
                                 <rect key="frame" x="0.0" y="114" width="320" height="162"/>
                                 <constraints>
@@ -289,18 +284,21 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="89G-Uv-6lb" firstAttribute="top" secondItem="bN7-zv-fdZ" secondAttribute="bottom" constant="50" id="6pc-2j-VAL"/>
+                            <constraint firstItem="89G-Uv-6lb" firstAttribute="top" secondItem="QhU-KN-lzA" secondAttribute="bottom" constant="70" id="0GF-71-NtS"/>
                             <constraint firstAttribute="trailingMargin" secondItem="89G-Uv-6lb" secondAttribute="trailing" constant="-16" id="IiR-hg-mgf"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="bN7-zv-fdZ" secondAttribute="trailing" constant="-16" id="chn-wR-w2I"/>
                             <constraint firstItem="89G-Uv-6lb" firstAttribute="leading" secondItem="wW4-pV-fpJ" secondAttribute="leadingMargin" constant="-16" id="eEY-ph-3ID"/>
-                            <constraint firstItem="bN7-zv-fdZ" firstAttribute="leading" secondItem="wW4-pV-fpJ" secondAttribute="leadingMargin" constant="-16" id="oyY-3t-eYn"/>
-                            <constraint firstItem="bN7-zv-fdZ" firstAttribute="top" secondItem="QhU-KN-lzA" secondAttribute="bottom" constant="20" id="q2S-Gx-fKS"/>
                         </constraints>
                     </view>
+                    <navigationItem key="navigationItem" title="Goal Set" id="fNh-HR-oRD">
+                        <barButtonItem key="backBarButtonItem" title="Back" id="EcX-ix-3k8"/>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="goalPicker" destination="89G-Uv-6lb" id="tWa-yL-0ou"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tyU-zb-KdS" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1157" y="1560"/>
+            <point key="canvasLocation" x="1073" y="1743"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="41z-Rp-be3">
@@ -343,7 +341,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bRU-ty-k4d" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1531" y="1560"/>
+            <point key="canvasLocation" x="2063" y="1560"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="xWy-uf-uNH">
@@ -363,6 +361,28 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hPN-12-iLL" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-248" y="1853"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="Ptw-ED-IFn">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="aK1-Lx-UnT" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="SfL-ts-0WI">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <toolbar key="toolbar" opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="FPr-36-Dvx">
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="tintColor" red="0.3294117647" green="0.68235294120000001" blue="0.2274509804" alpha="1" colorSpace="calibratedRGB"/>
+                    </toolbar>
+                    <connections>
+                        <segue destination="PkZ-uF-SMe" kind="relationship" relationship="rootViewController" id="CEM-A7-ugs"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="mNa-v1-cEk" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="632" y="1743"/>
         </scene>
     </scenes>
     <resources>

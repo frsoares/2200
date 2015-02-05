@@ -8,7 +8,7 @@
 
 import UIKit
 
-var progress: CGFloat = 8
+var progress: CGFloat = 2
 
 class ProgressView: UIView {
     

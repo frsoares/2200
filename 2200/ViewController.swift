@@ -35,12 +35,16 @@ class ViewController: UIViewController , CountDelegate {
     let maxUserWeight = 150
     
     var userWeight = 65
+    
+    // IBOutlets
   
     @IBOutlet weak var weightPicker: UIPickerView!
   
     @IBOutlet weak var lblGoal: UILabel!
     
     @IBOutlet weak var lblSteps: UILabel!
+    
+    @IBOutlet weak var progressView: ProgressView!
     
     
     override func viewDidLoad() {
