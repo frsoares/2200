@@ -13,6 +13,8 @@ import UIKit
 import HealthKit
 
 class ViewController: UIViewController , CountDelegate {
+    
+    
   
     // Progress goes from 0.0 to 1.0
     var progress: Double = 0.0 {
@@ -50,6 +52,10 @@ class ViewController: UIViewController , CountDelegate {
     
     @IBOutlet weak var progressView: ProgressView!
     
+    @IBAction func blurStart(sender: AnyObject) {
+        
+        
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -205,5 +211,6 @@ class ViewController: UIViewController , CountDelegate {
     return NSSet(objects: typeStepCount, typeBodyMass)
     
   }
+
 }
 

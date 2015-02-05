@@ -10,10 +10,21 @@ import UIKit
 
 class ReminderViewController: UIViewController {
 
-    @IBOutlet weak var pickerView: UIPickerView!
     @IBAction func doneButton(sender: AnyObject) {
         self.dismissViewControllerAnimated(true, completion: nil)
     }
+    @IBOutlet weak var reminderSwitch: UISwitch!
+    
+    
+    @IBAction func toggleSwitch(sender: AnyObject) {
+    }
+    
+    @IBOutlet weak var datePicker: UIDatePicker!
+    
+    @IBAction func datePickerAction(sender: AnyObject) {
+    }
+    
+    
     var kgArray = [String]()
 
     
