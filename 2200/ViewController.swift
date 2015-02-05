@@ -40,8 +40,33 @@ class ViewController: UIViewController , CountDelegate {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         self.loadWeightArray()
-        self.selectUserWeight()
+//        self.selectUserWeight()
         self.stepCounter = StepCounter(healthStore: healthStore, delegate: self);
+      
+      healthStore.requestAuthorizationToShareTypes(nil, readTypes: dataTypesToRead(), completion: {
+        (success:Bool, error:NSError!) -> Void in
+        //      if !success{
+        //        var alert = UIAlertView(title: "Missed authorization", message: "The app cannot work without authorization for HealthKit. Closing", delegate: nil, cancelButtonTitle: nil, otherButtonTitles: "Close")
+        //        alert.show();
+        //        self.dismissViewControllerAnimated(true, completion: nil)
+        
+        //      }
+        if success {
+          
+          println("Permission acquired")
+          
+          self.stepCounter!.initStepCount()
+          
+          self.stepCounter!.startObservingBackgroundChanges()
+          
+          self.selectUserWeight();
+        }
+        
+        
+        
+        
+        
+      })
         
     }
   
@@ -145,5 +170,20 @@ class ViewController: UIViewController , CountDelegate {
         
         healthStore.executeQuery(sampleQuery)
     }
+  
+  
+  private func dataTypesToRead() -> NSSet {
+    
+    var typeIds = [HKQuantityTypeIdentifierHeight, HKQuantityTypeIdentifierBodyMass, HKQuantityTypeIdentifierDistanceWalkingRunning]
+    
+    
+    var typeBodyMass = HKObjectType.quantityTypeForIdentifier(HKQuantityTypeIdentifierBodyMass)
+    //    var type2 = HKObjectType.quantityTypeForIdentifier(HKQuantityTypeIdentifierHeight)
+    //    var type3 = HKObjectType.quantityTypeForIdentifier(HKQuantityTypeIdentifierDistanceWalkingRunning)
+    var typeStepCount = HKObjectType.quantityTypeForIdentifier(HKQuantityTypeIdentifierStepCount)
+    
+    return NSSet(objects: typeStepCount, typeBodyMass)
+    
+  }
 }
 
