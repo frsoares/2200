@@ -61,6 +61,8 @@ class ViewController: UIViewController , CountDelegate {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
       
+        lblGoal.text = "10000"
+      
         var ad = UIApplication.sharedApplication().delegate as AppDelegate
         healthStore = ad.healthStore;
         self.loadWeightArray()

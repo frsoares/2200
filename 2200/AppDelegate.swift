@@ -19,6 +19,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
 
+        if application.respondsToSelector(Selector("registerUserNotificationSettings:")){
+        
+          var set = UIUserNotificationSettings(forTypes: .Alert, categories: nil);
+          application.registerUserNotificationSettings(set);
+        }
+      
         UITabBar.appearance().tintColor = UIColor(red: CGFloat(84.0/255.0), green: CGFloat(174.0/255.0), blue: CGFloat(58.0/255.0), alpha: CGFloat(1.0))
         return true
     }
