@@ -29,6 +29,14 @@ class StepToCalorieConverter: NSObject {
         return cals * caloriesToKiloFactor
     }
     
+    func getDaysToLose(#desiredWeight: Int) -> Double {
+        var stepsPerDay = 10000
+        var kilos = getKilosLost(forTotalSteps: stepsPerDay)
+        
+        return Double(desiredWeight) / kilos
+        
+        
+    }
 
    
 }
