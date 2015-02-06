@@ -34,7 +34,16 @@ class StepCounter {
     
     self.healthStore = healthStore
     
-    self.start = NSDate(timeIntervalSinceNow: -24*60*60) // now - 1 day
+
+    let calendar = NSCalendar.currentCalendar()
+    var comp = calendar.components(.CalendarUnitDay | .CalendarUnitMonth | .CalendarUnitYear, fromDate: NSDate())
+    
+    comp.hour = 0
+    comp.minute = 0
+    
+    self.start = calendar.dateFromComponents(comp)!;
+    
+//    self.start = NSDate(timeIntervalSinceNow: -24*60*60) // now - 1 day
     
     self.stepCount = 0;
     self.delegate = delegate;
