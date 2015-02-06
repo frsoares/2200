@@ -78,23 +78,23 @@ class GoalSetViewController: UIViewController {
         didSelectRow row: Int,
         inComponent component: Int) {
             
-            let alertController = UIAlertController(title: "Confirmation", message: "Confirm weight change?", preferredStyle: .Alert)
+ /*           let alertController = UIAlertController(title: "Confirmation", message: "Confirm weight change?", preferredStyle: .Alert)
             
             let cancelAction = UIAlertAction(title: "Cancel", style: .Cancel) { (action) in
                 self.setWeightInUI(animation:true)
             }
             alertController.addAction(cancelAction)
             
-            let OKAction = UIAlertAction(title: "OK", style: .Default) { (action) in
+            let OKAction = UIAlertAction(title: "OK", style: .Default) { (action) in*/
                 self.userGoal.weight = Int32(self.kgArray[row].toInt()!)
                 self.goalStore.saveGoal(self.userGoal)
                 
-            }
+           /* }
             alertController.addAction(OKAction)
             
             self.presentViewController(alertController, animated: true) {
                 
-            }
+            }*/
     }
 
     func selectedRowInComponent(component: Int) -> Int {
@@ -109,6 +109,8 @@ class GoalSetViewController: UIViewController {
                 pos = count
             }
         }
+        
+        println("\(pos)")
         return pos
     }
     

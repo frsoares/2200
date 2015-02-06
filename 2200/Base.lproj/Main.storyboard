@@ -128,16 +128,6 @@
                                 <color key="textColor" red="0.47843137250000001" green="0.47843137250000001" blue="0.47843137250000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hQh-s9-Wn5">
-                                <rect key="frame" x="126" y="269" width="69" height="30"/>
-                                <state key="normal" title="Tutorial">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="blurStart:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="tmg-w0-xAd"/>
-                                    <segue destination="lNb-WR-WgL" kind="modal" identifier="TutorialSegue" modalPresentationStyle="currentContext" modalTransitionStyle="crossDissolve" id="57d-gM-JeY"/>
-                                </connections>
-                            </button>
                             <pickerView contentMode="scaleToFill" showsSelectionIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MLa-IX-9iY">
                                 <rect key="frame" x="166" y="455" width="200" height="162"/>
                                 <constraints>
@@ -294,7 +284,7 @@
                         <sections>
                             <tableViewSection id="RN2-xP-Ws3">
                                 <cells>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="10" textLabel="zVj-WR-tcd" style="IBUITableViewCellStyleDefault" id="j8e-De-thA">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="10" textLabel="zVj-WR-tcd" detailTextLabel="vO3-fd-m2I" style="IBUITableViewCellStyleValue1" id="j8e-De-thA">
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="j8e-De-thA" id="aC3-Xk-Zxc">
                                             <autoresizingMask key="autoresizingMask"/>
@@ -303,6 +293,12 @@
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="65Kg" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="vO3-fd-m2I">
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                                    <color key="textColor" red="0.55686274509803924" green="0.55686274509803924" blue="0.57647058823529407" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
