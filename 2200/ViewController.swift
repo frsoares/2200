@@ -14,7 +14,6 @@ import HealthKit
 
 class ViewController: UIViewController , CountDelegate {
     
-    
   
     // Progress goes from 0.0 to 1.0
     var progress: Double = 0.0 {
@@ -32,7 +31,7 @@ class ViewController: UIViewController , CountDelegate {
     var kgArray = [String]()
     
   
-    var healthStore : HKHealthStore!// = HKHealthStore()
+    var healthStore : HKHealthStore!
   
     var stepCounter : StepCounter?
     
@@ -153,7 +152,6 @@ class ViewController: UIViewController , CountDelegate {
         var pos = -1
         var count = 0
         
-        //for (var i = defaultUserWeight; i <= maxUserWeight && pos == -1 ; i++, count++)
         if defaultUserWeight <= maxUserWeight {
             for i in defaultUserWeight...maxUserWeight {
                 if (i == userWeight)
@@ -180,14 +178,11 @@ class ViewController: UIViewController , CountDelegate {
       })
       
       self.progress = Double(newCount) / 10000.0 // hardcoded at 10000 steps for testing while we don't have everything set up.
-      
-//      self.lblSteps.text = "\(newCount)"
     
     }
     
     func loadWeightArray() {
         
-        //for (var i = defaultUserWeight; i <= maxUserWeight; i += 1)
         if defaultUserWeight <= maxUserWeight {
             for i in defaultUserWeight...maxUserWeight {
                 kgArray.append(String(i));
@@ -226,9 +221,7 @@ class ViewController: UIViewController , CountDelegate {
         
         self.healthStore.save(sample, withCompletion: {
             (success, error) in
-            //if !success {
-            //    let alertController = UIAlertController(title: "Error", message: "Error saving data on HealthKit", preferredStyle: .alert)
-            //} else {
+
             if success {
                 self.userWeight = Int(weight)
             }
@@ -242,10 +235,7 @@ class ViewController: UIViewController , CountDelegate {
   
   
   fileprivate func dataTypesToRead() -> Set<HKObjectType> {
-    //var typeIds = [HKQuantityTypeIdentifier.height, HKQuantityTypeIdentifier.bodyMass, HKQuantityTypeIdentifier.distanceWalkingRunning]
     let typeBodyMass = HKObjectType.quantityType(forIdentifier: HKQuantityTypeIdentifier.bodyMass)
-    //    var type2 = HKObjectType.quantityTypeForIdentifier(HKQuantityTypeIdentifierHeight)
-    //    var type3 = HKObjectType.quantityTypeForIdentifier(HKQuantityTypeIdentifierDistanceWalkingRunning)
     let typeStepCount = HKObjectType.quantityType(forIdentifier: HKQuantityTypeIdentifier.stepCount)
     
     return [typeStepCount!, typeBodyMass!]
@@ -256,10 +246,7 @@ class ViewController: UIViewController , CountDelegate {
     fileprivate func dataTypesToWrite() -> Set<HKSampleType> {
         let typeBodyMass = HKObjectType.quantityType(forIdentifier: HKQuantityTypeIdentifier.bodyMass)
         
-        //let x : HKSampleType = typeBodyMass!
-        //print(x.description)
-        
-        return [typeBodyMass!] //NSSet(objects: typeBodyMass)
+        return [typeBodyMass!]
     }
 }
 

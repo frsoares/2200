@@ -40,7 +40,6 @@ class GoalSetViewController: UIViewController {
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
 
     
@@ -64,7 +63,7 @@ class GoalSetViewController: UIViewController {
         let pickerLabel = UILabel()
         pickerLabel.textColor = greenColor
         pickerLabel.text = kgArray[row]
-        // pickerLabel.font = UIFont(name: pickerLabel.font.fontName, size: 15)
+
         pickerLabel.font = UIFont(name: "HelveticaNeue-Light", size: 30) // In this use your custom font
         pickerLabel.textAlignment = NSTextAlignment.center
         return pickerLabel
@@ -102,7 +101,6 @@ class GoalSetViewController: UIViewController {
         var count = 0
         let weight = self.userGoal.weight
         
-        //for (var i = defaultUserWeight; i <= maxUserWeight && pos == -1 ; i++, count++)
         if defaultUserWeight <= maxUserWeight {
             for i in defaultUserWeight...maxUserWeight {
                 if (i == weight)

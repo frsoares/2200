@@ -12,16 +12,6 @@ import UIKit
 
 class ProgressView: UIView {
     
-//    var propertyChangedListener : (CGFloat, CGFloat) -> Void = {
-//        println("The value of progress has changed from \($0) to \($1)")
-//    }
-//    
-//    var progress: CGFloat = 0 {
-//        didSet{
-//            ProgressView.setNeedsDisplay()
-//            propertyChangedListener(oldValue, ProgressView.progress)
-//        }
-//    }
 
     var progress : CGFloat = CGFloat(0.0) {
       didSet{

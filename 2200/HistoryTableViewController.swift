@@ -29,7 +29,6 @@ class HistoryTableViewController: UIViewController, UITableViewDelegate, UITable
       form.dateStyle=DateFormatter.Style.long
       form.timeStyle=DateFormatter.Style.none;
       
-//        UIApplication.sharedApplication().delegate
       
       let ad = UIApplication.shared.delegate as! AppDelegate
       healthStore = ad.healthStore;
@@ -44,10 +43,7 @@ class HistoryTableViewController: UIViewController, UITableViewDelegate, UITable
     let today = Date();
     
     
-    let calendar = NSCalendar(identifier: NSCalendar.Identifier.gregorian) //NSCalendar.Identifier(rawValue: NSCalendarIdentifierGregorian))
-    
-    
-    
+    let calendar = NSCalendar(identifier: NSCalendar.Identifier.gregorian)
     
     var teste = DateComponents()
     teste.day=2
@@ -58,7 +54,6 @@ class HistoryTableViewController: UIViewController, UITableViewDelegate, UITable
     teste.second=0
     
     let anchorDate = calendar?.date(from: teste);
-    
     
     let type : HKQuantityType = HKObjectType.quantityType(forIdentifier: HKQuantityTypeIdentifier.stepCount)!
     
@@ -109,11 +104,10 @@ class HistoryTableViewController: UIViewController, UITableViewDelegate, UITable
 
 //     MARK: - Table view data source
 
-//    func numberOfSectionsInTableView(tableView: UITableView!) -> Int {
-//        // #warning Potentially incomplete method implementation.
-//        // Return the number of sections.
-//        return 0
-//    }
+
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 1
+    }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return items.count
@@ -122,8 +116,8 @@ class HistoryTableViewController: UIViewController, UITableViewDelegate, UITable
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell{
         let cell:UITableViewCell = UITableViewCell(style: UITableViewCellStyle.subtitle, reuseIdentifier: "historyCell")
-        cell.textLabel?.text = "\(items[(indexPath as NSIndexPath).row].1)"
-        cell.detailTextLabel?.text = "\(items[(indexPath as NSIndexPath).row].0)"
+        cell.textLabel?.text = "\(items[indexPath.row].1)"
+        cell.detailTextLabel?.text = "\(items[indexPath.row].0)"
         return cell
     }
 

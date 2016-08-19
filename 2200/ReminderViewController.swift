@@ -46,7 +46,7 @@ class ReminderViewController: UIViewController {
         note.alertBody = "Hey! Just to remind you of walking your 10000 steps today! Check out how much you've walked already!"
         note.fireDate = selectedDate;
         
-        note.repeatInterval = NSCalendar.Unit.day //.CalendarUnitDay
+        note.repeatInterval = NSCalendar.Unit.day
         
         UIApplication.shared.scheduleLocalNotification(note);
 
@@ -66,7 +66,6 @@ class ReminderViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-      // Do any additional setup after loading the view.
 
        datePicker.datePickerMode = UIDatePickerMode.time;
       
@@ -75,7 +74,6 @@ class ReminderViewController: UIViewController {
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
     
   @IBAction func datePickerValueChanged(_ sender:AnyObject){
@@ -89,22 +87,11 @@ class ReminderViewController: UIViewController {
     note.alertBody = ""
     note.fireDate = selectedDate;
     
-    note.repeatInterval = NSCalendar.Unit.day //.CalendarUnitDay
+    note.repeatInterval = NSCalendar.Unit.day
     
     UIApplication.shared.scheduleLocalNotification(note);
     
   }
   
-  
-  
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }
