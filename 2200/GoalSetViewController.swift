@@ -13,8 +13,8 @@ class GoalSetViewController: UIViewController {
     @IBOutlet weak var goalPicker: UIPickerView!
     
     
-    @IBAction func doneButton(sender: AnyObject) {
-        self.dismissViewControllerAnimated(true, completion: nil)
+    @IBAction func doneButton(_ sender: AnyObject) {
+        self.dismiss(animated: true, completion: nil)
     }
   
     
@@ -31,7 +31,7 @@ class GoalSetViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         if let tempGoal = goalStore.getGoal() {
-            println("Goal object retrieved")
+            print("Goal object retrieved")
             self.userGoal = tempGoal
         }
         self.loadWeightArray()
@@ -44,37 +44,37 @@ class GoalSetViewController: UIViewController {
     }
 
     
-    func numberOfComponentsInPickerView(pickerView: UIPickerView!) -> Int {
+    func numberOfComponentsInPickerView(_ pickerView: UIPickerView!) -> Int {
         return 1
     }
     
-    func pickerView(pickerView: UIPickerView!,
+    func pickerView(_ pickerView: UIPickerView!,
         numberOfRowsInComponent component: Int) -> Int {
             return kgArray.count
     }
     
     
-    func pickerView(pickerView: UIPickerView!, titleForRow row: Int, forComponent component: Int) -> String {
+    func pickerView(_ pickerView: UIPickerView!, titleForRow row: Int, forComponent component: Int) -> String {
         return kgArray[row]
     }
     
     
-    func pickerView(pickerView: UIPickerView, viewForRow row: Int, forComponent component: Int, reusingView view: UIView!) -> UIView
+    func pickerView(_ pickerView: UIPickerView, viewForRow row: Int, forComponent component: Int, reusingView view: UIView!) -> UIView
     {
-        var pickerLabel = UILabel()
+        let pickerLabel = UILabel()
         pickerLabel.textColor = greenColor
         pickerLabel.text = kgArray[row]
         // pickerLabel.font = UIFont(name: pickerLabel.font.fontName, size: 15)
         pickerLabel.font = UIFont(name: "HelveticaNeue-Light", size: 30) // In this use your custom font
-        pickerLabel.textAlignment = NSTextAlignment.Center
+        pickerLabel.textAlignment = NSTextAlignment.center
         return pickerLabel
     }
     
-    func pickerView(pickerView: UIPickerView, rowHeightForComponent component: Int) -> CGFloat {
+    func pickerView(_ pickerView: UIPickerView, rowHeightForComponent component: Int) -> CGFloat {
         return 36.0
     }
     
-    func pickerView(pickerView: UIPickerView,
+    func pickerView(_ pickerView: UIPickerView,
         didSelectRow row: Int,
         inComponent component: Int) {
             
@@ -86,7 +86,7 @@ class GoalSetViewController: UIViewController {
             alertController.addAction(cancelAction)
             
             let OKAction = UIAlertAction(title: "OK", style: .Default) { (action) in*/
-                self.userGoal.weight = Int32(self.kgArray[row].toInt()!)
+                self.userGoal.weight = Int(self.kgArray[row])!
                 self.goalStore.saveGoal(self.userGoal)
                 
            /* }
@@ -97,32 +97,38 @@ class GoalSetViewController: UIViewController {
             }*/
     }
 
-    func selectedRowInComponent(component: Int) -> Int {
+    func selectedRowInComponent(_ component: Int) -> Int {
         var pos = -1
         var count = 0
-        var weight = Int(self.userGoal.weight)
+        let weight = self.userGoal.weight
         
-        for (var i = defaultUserWeight; i <= maxUserWeight && pos == -1 ; i++, count++)
-        {
-            if (i == weight)
-            {
-                pos = count
+        //for (var i = defaultUserWeight; i <= maxUserWeight && pos == -1 ; i++, count++)
+        if defaultUserWeight <= maxUserWeight {
+            for i in defaultUserWeight...maxUserWeight {
+                if (i == weight)
+                {
+                    pos = count
+                    break
+                }
+                count = count + 1
             }
         }
         
-        println("\(pos)")
+        print("\(pos)")
         return pos
     }
     
     func loadWeightArray() {
-        for (var i = defaultUserWeight; i <= maxUserWeight; i++)
-        {
-            kgArray.append(String(i));
+        if defaultUserWeight <= maxUserWeight{
+            
+            for i in defaultUserWeight...maxUserWeight {
+                kgArray.append(String(i));
+            }
         }
     }
 
     
-    func setWeightInUI(animation: Bool = false) {
+    func setWeightInUI(_ animation: Bool = false) {
         self.goalPicker.selectRow(self.selectedRowInComponent(Int(userGoal.weight)), inComponent: 0, animated: animation)
     }
 

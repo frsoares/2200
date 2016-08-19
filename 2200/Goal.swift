@@ -9,10 +9,12 @@
 import UIKit
 
 class Goal: NSObject, NSCoding {
-    private var _weight: Int32 = 0;
-    private var _weeks: Int32 = 0;
     
-    var weight: Int32 {
+    
+    fileprivate var _weight: Int = 0;
+    fileprivate var _weeks: Int = 0;
+    
+    var weight: Int {
         get {
             return _weight;
         }
@@ -21,7 +23,7 @@ class Goal: NSObject, NSCoding {
         }
     }
     
-    var weeks: Int32 {
+    var weeks: Int {
         get {
             return _weeks;
         }
@@ -36,14 +38,13 @@ class Goal: NSObject, NSCoding {
     }
     
     required init(coder aDecoder: NSCoder) {
-        _weight  = aDecoder.decodeIntForKey("weight")
-        _weeks  = aDecoder.decodeIntForKey("weeks")
+        _weight  = aDecoder.decodeInteger(forKey: "weight")
+        _weeks  = aDecoder.decodeInteger(forKey: "weeks")
     }
     
-    func encodeWithCoder(aCoder: NSCoder) {
-        aCoder.encodeInt(_weight, forKey: "weight")
-        aCoder.encodeInt(_weeks, forKey: "weeks")
-        
+    func encode(with aCoder: NSCoder) {
+        aCoder.encode(_weight, forKey: "weight")
+        aCoder.encode(_weeks, forKey: "weeks")
     }
     
 }

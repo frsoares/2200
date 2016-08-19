@@ -19,7 +19,7 @@ class ViewController: UIViewController , CountDelegate {
     // Progress goes from 0.0 to 1.0
     var progress: Double = 0.0 {
       didSet{
-        dispatch_async(dispatch_get_main_queue(), {
+        DispatchQueue.main.async(execute: {
         
           self.progressView.progress =  CGFloat(self.progress) * 10.0
         
@@ -52,34 +52,27 @@ class ViewController: UIViewController , CountDelegate {
     
     @IBOutlet weak var progressView: ProgressView!
     
-    @IBAction func blurStart(sender: AnyObject) {
+    @IBAction func blurStart(_ sender: AnyObject) {
         
         
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
       
         lblGoal.text = "10000"
       
-        var ad = UIApplication.sharedApplication().delegate as AppDelegate
+        let ad = UIApplication.shared.delegate as! AppDelegate
         healthStore = ad.healthStore;
         self.loadWeightArray()
-//        self.selectUserWeight()
         self.stepCounter = StepCounter(healthStore: healthStore, delegate: self);
       
-      healthStore.requestAuthorizationToShareTypes(dataTypesToWrite(), readTypes: dataTypesToRead(), completion: {
-        (success:Bool, error:NSError!) -> Void in
-        //      if !success{
-        //        var alert = UIAlertView(title: "Missed authorization", message: "The app cannot work without authorization for HealthKit. Closing", delegate: nil, cancelButtonTitle: nil, otherButtonTitles: "Close")
-        //        alert.show();
-        //        self.dismissViewControllerAnimated(true, completion: nil)
-        
-        //      }
+      healthStore.requestAuthorization(toShare: dataTypesToWrite(), read: dataTypesToRead())  {
+        (success:Bool, error:Error?) -> Void in
+
         if success {
           
-          println("Permission acquired")
+          print("Permission acquired")
           
           self.stepCounter!.initStepCount()
           
@@ -88,11 +81,10 @@ class ViewController: UIViewController , CountDelegate {
           self.selectUserWeight();
         }
         
-      })
-        
+      }
     }
   
-    override func viewDidAppear(animated: Bool) {
+    override func viewDidAppear(_ animated: Bool) {
       if let count = stepCounter?.stepCount {
         countUpdated(count)
       }
@@ -103,70 +95,74 @@ class ViewController: UIViewController , CountDelegate {
         // Dispose of any resources that can be recreated.
     }
     
-    // weightPicker configuration
-    func pickerView(pickerView: UIPickerView,
+    //: weightPicker configuration
+    func pickerView(_ pickerView: UIPickerView,
         didSelectRow row: Int,
         inComponent component: Int) {
             
-            let alertController = UIAlertController(title: "Confirmation", message: "Confirm weight change?", preferredStyle: .Alert)
+            let alertController = UIAlertController(title: "Confirmation", message: "Confirm weight change?", preferredStyle: .alert)
     
-            let cancelAction = UIAlertAction(title: "Cancel", style: .Cancel) { (action) in
+            let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) { (action) in
                 //restore current weight
                 self.setWeightInUI(self.userWeight, animation:true)
             }
             alertController.addAction(cancelAction)
             
-            let OKAction = UIAlertAction(title: "OK", style: .Default) { (action) in
-                println(row)
-                var newWeight = self.kgArray[row].toInt()
+            let OKAction = UIAlertAction(title: "OK", style: .default) { (action) in
+                print(row)
+                let newWeight = Int(self.kgArray[row])
                 self.saveUserWeight(Double(newWeight!))
             }
             alertController.addAction(OKAction)
             
-            self.presentViewController(alertController, animated: true) {
+            self.present(alertController, animated: true) {
                 
             }
 }
 
-    func numberOfComponentsInPickerView(pickerView: UIPickerView!) -> Int {
+    func numberOfComponentsInPickerView(_ pickerView: UIPickerView!) -> Int {
         return 1
     }
     
-    func pickerView(pickerView: UIPickerView!,
+    func pickerView(_ pickerView: UIPickerView!,
         numberOfRowsInComponent component: Int) -> Int {
             return kgArray.count
     }
     
     
-    func pickerView(pickerView: UIPickerView!, titleForRow row: Int, forComponent component: Int) -> String {
+    func pickerView(_ pickerView: UIPickerView!, titleForRow row: Int, forComponent component: Int) -> String {
         return kgArray[row]
     }
     
     
-    func pickerView(pickerView: UIPickerView, viewForRow row: Int, forComponent component: Int, reusingView view: UIView!) -> UIView
+    func pickerView(_ pickerView: UIPickerView, viewForRow row: Int, forComponent component: Int, reusingView view: UIView!) -> UIView
     {
-        var pickerLabel = UILabel()
+        let pickerLabel = UILabel()
         pickerLabel.textColor = greenColor
         pickerLabel.text = kgArray[row]
-        // pickerLabel.font = UIFont(name: pickerLabel.font.fontName, size: 15)
         pickerLabel.font = UIFont(name: "HelveticaNeue-Light", size: 30) // In this use your custom font
-        pickerLabel.textAlignment = NSTextAlignment.Center
+        pickerLabel.textAlignment = NSTextAlignment.center
         return pickerLabel
     }
     
-    func pickerView(pickerView: UIPickerView, rowHeightForComponent component: Int) -> CGFloat {
+    func pickerView(_ pickerView: UIPickerView, rowHeightForComponent component: Int) -> CGFloat {
         return 36.0
     }
     
-    func selectedRowInComponent(component: Int) -> Int {
+    func selectedRowInComponent(_ component: Int) -> Int {
         var pos = -1
         var count = 0
         
-        for (var i = defaultUserWeight; i <= maxUserWeight && pos == -1 ; i++, count++)
-        {
-            if (i == userWeight)
-            {
-                pos = count
+        //for (var i = defaultUserWeight; i <= maxUserWeight && pos == -1 ; i++, count++)
+        if defaultUserWeight <= maxUserWeight {
+            for i in defaultUserWeight...maxUserWeight {
+                if (i == userWeight)
+                {
+                    // achou a posição do peso
+                    pos = count
+                    break;
+                }
+                count = count + 1
             }
         }
         return pos
@@ -177,9 +173,9 @@ class ViewController: UIViewController , CountDelegate {
     /*
      Method called every time the step counter is updated.
     */
-    func countUpdated(newCount: Int) {
+    func countUpdated(_ newCount: Int) {
       
-      dispatch_async(dispatch_get_main_queue(), {
+      DispatchQueue.main.async(execute: {
         self.lblSteps.text = "\(newCount)"; self.lblSteps.setNeedsDisplay()
       })
       
@@ -190,73 +186,80 @@ class ViewController: UIViewController , CountDelegate {
     }
     
     func loadWeightArray() {
-        for (var i = defaultUserWeight; i <= maxUserWeight; i++)
-        {
-            kgArray.append(String(i));
+        
+        //for (var i = defaultUserWeight; i <= maxUserWeight; i += 1)
+        if defaultUserWeight <= maxUserWeight {
+            for i in defaultUserWeight...maxUserWeight {
+                kgArray.append(String(i));
+            }
         }
     }
     
     func selectUserWeight() {
-        let past : NSDate = NSDate.distantPast() as NSDate
-        let now = NSDate()
-        let mostRecentPredicate = HKQuery.predicateForSamplesWithStartDate(past, endDate: now, options: HKQueryOptions.None)
+        let past : Date = Date.distantPast as Date
+        let now = Date()
+        let mostRecentPredicate = HKQuery.predicateForSamples(withStart: past, end: now, options: HKQueryOptions())
         let sortDescriptor = NSSortDescriptor(key: HKSampleSortIdentifierStartDate, ascending: false);
-        let idWeight = HKObjectType.quantityTypeForIdentifier(HKQuantityTypeIdentifierBodyMass)
-        let sampleQuery = HKSampleQuery(sampleType: idWeight, predicate: mostRecentPredicate, limit: 0, sortDescriptors: [sortDescriptor], resultsHandler:
+        let idWeight = HKObjectType.quantityType(forIdentifier: HKQuantityTypeIdentifier.bodyMass)
+        let sampleQuery = HKSampleQuery(sampleType: idWeight!, predicate: mostRecentPredicate, limit: 0, sortDescriptors: [sortDescriptor], resultsHandler:
             {(_,results,_) -> Void in
                 
                 if (results != nil) {
-                  if let sample : HKQuantitySample = results.first as? HKQuantitySample {
-                    let quantity = sample.quantity.doubleValueForUnit(HKUnit.gramUnitWithMetricPrefix(.Kilo))
+                  if let sample : HKQuantitySample = results?.first as? HKQuantitySample {
+                    let quantity = sample.quantity.doubleValue(for: HKUnit.gramUnit(with: .kilo))
                     
-                    dispatch_async(dispatch_get_main_queue(), {
+                    DispatchQueue.main.async {
                         self.setWeightInUI(Int(quantity))
-                    })
+                    }
                   }
                 }
         })
         
-        healthStore.executeQuery(sampleQuery)
+        healthStore.execute(sampleQuery)
     }
       
-    func saveUserWeight(weight:Double) {
-        let bmType = HKQuantityType.quantityTypeForIdentifier(HKQuantityTypeIdentifierBodyMass)
-        let bmQuantity = HKQuantity(unit: HKUnit.gramUnit(), doubleValue:  weight * 1000 )
-        let sample = HKQuantitySample(type: bmType, quantity: bmQuantity, startDate: NSDate(), endDate: NSDate())
+    func saveUserWeight(_ weight:Double) {
+        let bmType = HKQuantityType.quantityType(forIdentifier: HKQuantityTypeIdentifier.bodyMass)
+        let bmQuantity = HKQuantity(unit: HKUnit.gram(), doubleValue:  weight * 1000 )
+        let sample = HKQuantitySample(type: bmType!, quantity: bmQuantity, start: Date(), end: Date())
         
         
-        self.healthStore.saveObject(sample, withCompletion: {
+        self.healthStore.save(sample, withCompletion: {
             (success, error) in
-            if !success {
-                let alertController = UIAlertController(title: "Error", message: "Error saving data on HealthKit", preferredStyle: .Alert)
-            } else {
+            //if !success {
+            //    let alertController = UIAlertController(title: "Error", message: "Error saving data on HealthKit", preferredStyle: .alert)
+            //} else {
+            if success {
                 self.userWeight = Int(weight)
             }
         })
     }
     
-    func setWeightInUI(weight:Int, animation: Bool = false) {
+    func setWeightInUI(_ weight:Int, animation: Bool = false) {
         self.userWeight = weight
         self.weightPicker.selectRow(self.selectedRowInComponent(weight), inComponent: 0, animated: animation)
     }
   
   
-  private func dataTypesToRead() -> NSSet {
-    var typeIds = [HKQuantityTypeIdentifierHeight, HKQuantityTypeIdentifierBodyMass, HKQuantityTypeIdentifierDistanceWalkingRunning]
-    var typeBodyMass = HKObjectType.quantityTypeForIdentifier(HKQuantityTypeIdentifierBodyMass)
+  fileprivate func dataTypesToRead() -> Set<HKObjectType> {
+    //var typeIds = [HKQuantityTypeIdentifier.height, HKQuantityTypeIdentifier.bodyMass, HKQuantityTypeIdentifier.distanceWalkingRunning]
+    let typeBodyMass = HKObjectType.quantityType(forIdentifier: HKQuantityTypeIdentifier.bodyMass)
     //    var type2 = HKObjectType.quantityTypeForIdentifier(HKQuantityTypeIdentifierHeight)
     //    var type3 = HKObjectType.quantityTypeForIdentifier(HKQuantityTypeIdentifierDistanceWalkingRunning)
-    var typeStepCount = HKObjectType.quantityTypeForIdentifier(HKQuantityTypeIdentifierStepCount)
+    let typeStepCount = HKObjectType.quantityType(forIdentifier: HKQuantityTypeIdentifier.stepCount)
     
-    return NSSet(objects: typeStepCount, typeBodyMass)
+    return [typeStepCount!, typeBodyMass!]
     
   }
 
 
-    private func dataTypesToWrite() -> NSSet {
-        var typeBodyMass = HKObjectType.quantityTypeForIdentifier(HKQuantityTypeIdentifierBodyMass)
+    fileprivate func dataTypesToWrite() -> Set<HKSampleType> {
+        let typeBodyMass = HKObjectType.quantityType(forIdentifier: HKQuantityTypeIdentifier.bodyMass)
         
-        return NSSet(objects: typeBodyMass)
+        //let x : HKSampleType = typeBodyMass!
+        //print(x.description)
+        
+        return [typeBodyMass!] //NSSet(objects: typeBodyMass)
     }
 }
 

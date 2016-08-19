@@ -12,16 +12,16 @@ class GoalStore: NSObject {
     
     
     func getGoal() -> Goal? {
-        if let data = NSUserDefaults.standardUserDefaults().objectForKey("goalData") as? NSData {
-            return NSKeyedUnarchiver.unarchiveObjectWithData(data) as? Goal
+        if let data = UserDefaults.standard.object(forKey: "goalData") as? Data {
+            return NSKeyedUnarchiver.unarchiveObject(with: data) as? Goal
         }
         return nil;
     }
     
     
-    func saveGoal(newGoal: Goal) {
-        let data = NSKeyedArchiver.archivedDataWithRootObject(newGoal)
-        NSUserDefaults.standardUserDefaults().setObject(data, forKey: "goaldata")
+    func saveGoal(_ newGoal: Goal) {
+        let data = NSKeyedArchiver.archivedData(withRootObject: newGoal)
+        UserDefaults.standard.set(data, forKey: "goaldata")
     }
     
     

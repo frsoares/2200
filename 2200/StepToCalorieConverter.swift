@@ -14,7 +14,7 @@ class StepToCalorieConverter: NSObject {
     //http://www.livestrong.com/article/320124-how-many-calories-does-the-average-person-use-per-step/
     let stepToCaloriesFactor = 1.0/20;
     
-    func getCaloriesLost(#forTotalSteps: Int) -> Double {
+    func getCaloriesLost(forTotalSteps: Int) -> Double {
         
         return (stepToCaloriesFactor * Double(forTotalSteps))
     }
@@ -23,15 +23,15 @@ class StepToCalorieConverter: NSObject {
     //http://health.ninemsn.com.au/menshealth/healthandfitness/8412125/how-to-burn-1000-calories-fast
     
     let caloriesToKiloFactor = 1.0/7700
-    func getKilosLost(#forTotalSteps: Int) -> Double {
-        var cals = Double(getCaloriesLost(forTotalSteps:forTotalSteps))
+    func getKilosLost(forTotalSteps: Int) -> Double {
+        let cals = Double(getCaloriesLost(forTotalSteps:forTotalSteps))
         
         return cals * caloriesToKiloFactor
     }
     
-    func getDaysToLose(#desiredWeight: Int) -> Double {
-        var stepsPerDay = 10000
-        var kilos = getKilosLost(forTotalSteps: stepsPerDay)
+    func getDaysToLose(desiredWeight: Int) -> Double {
+        let stepsPerDay = 10000
+        let kilos = getKilosLost(forTotalSteps: stepsPerDay)
         
         return Double(desiredWeight) / kilos
         

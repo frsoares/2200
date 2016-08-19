@@ -10,45 +10,45 @@ import UIKit
 
 class ReminderViewController: UIViewController {
 
-    @IBAction func doneButton(sender: AnyObject) {
-        self.dismissViewControllerAnimated(true, completion: nil)
+    @IBAction func doneButton(_ sender: AnyObject) {
+        self.dismiss(animated: true, completion: nil)
     }
     @IBOutlet weak var reminderSwitch: UISwitch!
     
-    @IBAction func toggleSwitch(sender: AnyObject) {
+    @IBAction func toggleSwitch(_ sender: AnyObject) {
       
-      if reminderSwitch.on {
+      if reminderSwitch.isOn {
       
         datePickerValueChanged(reminderSwitch);
         
       }
       else{
         
-        UIApplication.sharedApplication().cancelAllLocalNotifications()
+        UIApplication.shared.cancelAllLocalNotifications()
       
       }
     }
     
     @IBOutlet weak var datePicker: UIDatePicker!
     
-    @IBAction func datePickerAction(sender: AnyObject) {
+    @IBAction func datePickerAction(_ sender: AnyObject) {
       
-      println("date picker called")
+      print("date picker called")
       
       
-      if reminderSwitch.on{
-        UIApplication.sharedApplication().cancelAllLocalNotifications();
+      if reminderSwitch.isOn{
+        UIApplication.shared.cancelAllLocalNotifications();
         
-        var selectedDate = datePicker.date;
+        let selectedDate = datePicker.date;
         
-        var note = UILocalNotification()
+        let note = UILocalNotification()
         
         note.alertBody = "Hey! Just to remind you of walking your 10000 steps today! Check out how much you've walked already!"
         note.fireDate = selectedDate;
         
-        note.repeatInterval = .CalendarUnitDay
+        note.repeatInterval = NSCalendar.Unit.day //.CalendarUnitDay
         
-        UIApplication.sharedApplication().scheduleLocalNotification(note);
+        UIApplication.shared.scheduleLocalNotification(note);
 
       }
     }
@@ -68,7 +68,7 @@ class ReminderViewController: UIViewController {
 
       // Do any additional setup after loading the view.
 
-       datePicker.datePickerMode = UIDatePickerMode.Time;
+       datePicker.datePickerMode = UIDatePickerMode.time;
       
       
     }
@@ -78,20 +78,20 @@ class ReminderViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-  @IBAction func datePickerValueChanged(sender:AnyObject){
+  @IBAction func datePickerValueChanged(_ sender:AnyObject){
     
-    UIApplication.sharedApplication().cancelAllLocalNotifications();
+    UIApplication.shared.cancelAllLocalNotifications();
     
-    var selectedDate = datePicker.date;
+    let selectedDate = datePicker.date;
     
-    var note = UILocalNotification()
+    let note = UILocalNotification()
     
     note.alertBody = ""
     note.fireDate = selectedDate;
     
-    note.repeatInterval = .CalendarUnitDay
+    note.repeatInterval = NSCalendar.Unit.day //.CalendarUnitDay
     
-    UIApplication.sharedApplication().scheduleLocalNotification(note);
+    UIApplication.shared.scheduleLocalNotification(note);
     
   }
   

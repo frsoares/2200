@@ -20,18 +20,18 @@ class HistoryTableViewController: UIViewController, UITableViewDelegate, UITable
   
     var healthStore : HKHealthStore!
   
-    var form = NSDateFormatter();
+    var form = DateFormatter();
   
   
     override func viewDidLoad() {
         super.viewDidLoad()
   
-      form.dateStyle=NSDateFormatterStyle.LongStyle
-      form.timeStyle=NSDateFormatterStyle.NoStyle;
+      form.dateStyle=DateFormatter.Style.long
+      form.timeStyle=DateFormatter.Style.none;
       
 //        UIApplication.sharedApplication().delegate
       
-      var ad = UIApplication.sharedApplication().delegate as AppDelegate
+      let ad = UIApplication.shared.delegate as! AppDelegate
       healthStore = ad.healthStore;
       
       loadHistoryData();
@@ -39,14 +39,17 @@ class HistoryTableViewController: UIViewController, UITableViewDelegate, UITable
 
   func loadHistoryData(){
     
-    let past = NSDate.distantPast() as NSDate
+    let past = Date.distantPast as Date
     
-    let today = NSDate();
+    let today = Date();
     
-
-    let calendar = NSCalendar(identifier: NSGregorianCalendar)
     
-    let teste = NSDateComponents()
+    let calendar = NSCalendar(identifier: NSCalendar.Identifier.gregorian) //NSCalendar.Identifier(rawValue: NSCalendarIdentifierGregorian))
+    
+    
+    
+    
+    var teste = DateComponents()
     teste.day=2
     teste.month=2
     teste.year=2015
@@ -54,18 +57,18 @@ class HistoryTableViewController: UIViewController, UITableViewDelegate, UITable
     teste.minute=0
     teste.second=0
     
-    let anchorDate = calendar?.dateFromComponents(teste);
+    let anchorDate = calendar?.date(from: teste);
     
     
-    let type : HKQuantityType = HKObjectType.quantityTypeForIdentifier(HKQuantityTypeIdentifierStepCount)
+    let type : HKQuantityType = HKObjectType.quantityType(forIdentifier: HKQuantityTypeIdentifier.stepCount)!
     
-    let intervalComponents = NSDateComponents();
+    var intervalComponents = DateComponents();
     
     intervalComponents.day = 1;
     
-    let predicate = HKQuery.predicateForSamplesWithStartDate(past, endDate: today, options: HKQueryOptions.StrictStartDate)
+    let predicate = HKQuery.predicateForSamples(withStart: past, end: today, options: HKQueryOptions.strictStartDate)
     
-    let query = HKStatisticsCollectionQuery(quantityType: type, quantitySamplePredicate: predicate, options: HKStatisticsOptions.CumulativeSum, anchorDate: anchorDate, intervalComponents: intervalComponents)
+    let query = HKStatisticsCollectionQuery(quantityType: type, quantitySamplePredicate: predicate, options: HKStatisticsOptions.cumulativeSum, anchorDate: anchorDate!, intervalComponents: intervalComponents)
     
     query.initialResultsHandler = {(query, results, error) -> Void in
       
@@ -73,27 +76,29 @@ class HistoryTableViewController: UIViewController, UITableViewDelegate, UITable
       
         let statList = realResults.statistics()
         
-        var unit = HKUnit(fromString: "count");
+        let unit = HKUnit(from: "count");
         
         for i : HKStatistics in statList as [HKStatistics] {
           
           if let quantity = i.sumQuantity(){
-            let value = Int(quantity.doubleValueForUnit(unit))
+            let value = Int(quantity.doubleValue(for: unit))
             let day = i.startDate;
-            items += [("\(self.form.stringFromDate(day))", "\(value)")]
+            items.append(("\(self.form.string(from: day))", "\(value)"))
           }
           
         }
         
-        dispatch_async(dispatch_get_main_queue(), {
+        
+        
+        DispatchQueue.main.async {
             self.historyTable.reloadData();
-        })
+        }
         
       }
       
     }
     
-    healthStore.executeQuery(query);
+    healthStore.execute(query);
     
   }
   
@@ -110,15 +115,15 @@ class HistoryTableViewController: UIViewController, UITableViewDelegate, UITable
 //        return 0
 //    }
 
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return items.count
     }
     
     
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell{
-        var cell:UITableViewCell = UITableViewCell(style: UITableViewCellStyle.Subtitle, reuseIdentifier: "historyCell")
-        cell.textLabel?.text = "\(items[indexPath.row].1)"
-        cell.detailTextLabel?.text = "\(items[indexPath.row].0)"
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell{
+        let cell:UITableViewCell = UITableViewCell(style: UITableViewCellStyle.subtitle, reuseIdentifier: "historyCell")
+        cell.textLabel?.text = "\(items[(indexPath as NSIndexPath).row].1)"
+        cell.detailTextLabel?.text = "\(items[(indexPath as NSIndexPath).row].0)"
         return cell
     }
 

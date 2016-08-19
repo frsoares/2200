@@ -31,29 +31,29 @@ class ProgressView: UIView {
   
     
     
-    override func drawRect(rect: CGRect) {
+    override func draw(_ rect: CGRect) {
 
       
-        var rectPosition = 362 + -(self.progress * 36)
-        var polyPosition1 = 340 + -(self.progress * 36)
-        var polyPosition2 = 362 + -(self.progress * 36)
+        let rectPosition = 362 + -(self.progress * 36)
+        let polyPosition1 = 340 + -(self.progress * 36)
+        let polyPosition2 = 362 + -(self.progress * 36)
       
         //// Color Declarations
         let color = UIColor(red: 0.565, green: 0.937, blue: 0.478, alpha: 1.000)
 
   
         // Polygon Drawing
-        var polygonPath = UIBezierPath()
-        polygonPath.moveToPoint(CGPointMake(190, polyPosition1))
-        polygonPath.addLineToPoint(CGPointMake(380, polyPosition2))
-        polygonPath.addLineToPoint(CGPointMake(0, polyPosition2))
-        polygonPath.closePath()
+        let polygonPath = UIBezierPath()
+        polygonPath.move(to: CGPoint(x: 190, y: polyPosition1))
+        polygonPath.addLine(to: CGPoint(x: 380, y: polyPosition2))
+        polygonPath.addLine(to: CGPoint(x: 0, y: polyPosition2))
+        polygonPath.close()
         color.setFill()
         polygonPath.fill()
 
 
         //// Rectangle Drawing
-        let rectanglePath = UIBezierPath(rect: CGRectMake(0, rectPosition, 380, 362))
+        let rectanglePath = UIBezierPath(rect: CGRect(x: 0, y: rectPosition, width: 380, height: 362))
         color.setFill()
         rectanglePath.fill()
         

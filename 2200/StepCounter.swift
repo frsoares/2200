@@ -14,11 +14,11 @@ class StepCounter {
   
   var healthStore : HKHealthStore;
   
-  var anchor : Int = 0;
+  var anchor : HKQueryAnchor = HKQueryAnchor(fromValue: 0);
   
   var obQuery : HKObserverQuery?
   
-  var start : NSDate;
+  var start : Date;
   
   //  var predicate : NSPredicate?
   
@@ -35,13 +35,13 @@ class StepCounter {
     self.healthStore = healthStore
     
 
-    let calendar = NSCalendar.currentCalendar()
-    var comp = calendar.components(.CalendarUnitDay | .CalendarUnitMonth | .CalendarUnitYear, fromDate: NSDate())
+    let calendar = NSCalendar.current
+    var comp = calendar.dateComponents([.day, .month, .year], from: Date())
     
     comp.hour = 0
     comp.minute = 0
     
-    self.start = calendar.dateFromComponents(comp)!;
+    self.start = calendar.date(from: comp)!;
     
 //    self.start = NSDate(timeIntervalSinceNow: -24*60*60) // now - 1 day
     
@@ -53,103 +53,52 @@ class StepCounter {
   
   
   func initStepCount(){
+
+    let yesterday = start;
     
-    //    let past : NSDate = NSDate.distantPast() as NSDate
+    //let sortDescriptor = NSSortDescriptor(key: HKSampleSortIdentifierStartDate, ascending: false);
     
-    
-    
-    
-    let yesterday = start; //NSDate(timeIntervalSinceNow: -24*60*60)
-    
-    
-    let sortDescriptor = NSSortDescriptor(key: HKSampleSortIdentifierStartDate, ascending: false);
-    
-    let idSteps = HKObjectType.quantityTypeForIdentifier(HKQuantityTypeIdentifierStepCount)
-    
-    //    let statQuery = HKStatisticsQuery(quantityType: idSteps, quantitySamplePredicate: mostRecentPredicate, options: HKStatisticsOptions.CumulativeSum, completionHandler: {(_,statistics,_) -> Void in
-    //      if (statistics != nil) {
-    //
-    //        if let quantity : HKQuantity! = statistics.sumQuantity(){
-    //            if let q = quantity {
-    //                var unit = HKUnit(fromString: "count")
-    //                self.stepCount = Int(q.doubleValueForUnit(unit));
-    //            }
-    //        }
-    //
-    //      }
-    //    })
+    let idSteps = HKObjectType.quantityType(forIdentifier: HKQuantityTypeIdentifier.stepCount)
     
     
-    //        if let setUpQuery = self.obQuery {
-    //          self.healthStore.stopQuery(setUpQuery);
-    //          self.obQuery = nil;
-    //        }
-    //
-    
-    if let setUpQuery = self.obQuery {
+    //if self.obQuery != nil {
       // skip;
-    }
-    else{
-      self.obQuery = HKObserverQuery(sampleType: idSteps, predicate:nil, updateHandler: {(_, handler, _) -> Void in
+    //}
+    //else{
+    if self.obQuery == nil {
+      self.obQuery = HKObserverQuery(sampleType: idSteps!, predicate:nil, updateHandler: {(_, handler, _) -> Void in
         
-        let mostRecentPredicate = HKQuery.predicateForSamplesWithStartDate(yesterday, endDate: NSDate(), options: HKQueryOptions.StrictStartDate)
+        let mostRecentPredicate = HKQuery.predicateForSamples(withStart: yesterday, end: NSDate() as Date, options: HKQueryOptions.strictStartDate)
         
-        //        dispatch_after(5*1000,dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), { self.initStepCount() });
-        //        //            self.initStepCount();
-        
-        let anchorQuery = HKAnchoredObjectQuery(type: idSteps, predicate: mostRecentPredicate, anchor: self.anchor, limit: 0, completionHandler: {(_, results, newAnchor,_) -> Void in
+        let anchorQuery = HKAnchoredObjectQuery(type: idSteps!, predicate: mostRecentPredicate, anchor: self.anchor, limit: 0) { (_, results, _, newAnchor, _) in //, resultsHandler: {(_, results, newAnchor,_) -> Void in
           if (results != nil) {
-            
-            if(newAnchor > self.anchor){
-            
-              self.anchor = newAnchor
-              
-              var sum:Int = 0
-              
-              var unit = HKUnit(fromString: "count")
-              
-              for quantitySample : HKQuantitySample in results as [HKQuantitySample]! {
-                var quantity = quantitySample.quantity
-                sum += Int(quantity.doubleValueForUnit(unit))
-              }
-              
-              self.stepCount += sum
-              
-              //        if let quantity : HKQuantity! = statistics.sumQuantity(){
-              //            if let q = quantity {
-              //                var unit = HKUnit(fromString: "count")
-              //                self.stepCount = Int(q.doubleValueForUnit(unit));
-              //            }
-              //        }
-              
-              
+            if let newAnchor = newAnchor {
+                
+                self.anchor = newAnchor
+                
+                var sum:Int = 0
+                
+                let unit = HKUnit(from: "count")
+                
+                for quantitySample : HKQuantitySample in results as! [HKQuantitySample]! {
+                    let quantity = quantitySample.quantity
+                    sum = sum + Int(quantity.doubleValue(for: unit))
+                }
+                
+                self.stepCount = self.stepCount + sum
+                
             }
             
-            
           }
-        })
-        self.healthStore.executeQuery(anchorQuery);
-        //
-        //    healthStore.executeQuery(statQuery);
-        
+        }
+        //})
+        self.healthStore.execute(anchorQuery);
 
         handler()
         
-        /* For testing purposes */
-//        dispatch_async(dispatch_get_main_queue(), {
-//          
-//          var alert  = UIAlertView(title: "Update", message: "Passos atualizados", delegate: nil, cancelButtonTitle: nil, otherButtonTitles: "ok" );
-//          alert.show()
-//          
-//        });
-        
-        
       })
       
-      
-      
-      
-      self.healthStore.executeQuery(self.obQuery);
+      self.healthStore.execute(self.obQuery!);
     }
     
     
@@ -157,44 +106,44 @@ class StepCounter {
   }
   
   func startObservingBackgroundChanges(){
-    let idSteps = HKObjectType.quantityTypeForIdentifier(HKQuantityTypeIdentifierStepCount)
+    let idSteps = HKObjectType.quantityType(forIdentifier: HKQuantityTypeIdentifier.stepCount)
     
-    self.healthStore.enableBackgroundDeliveryForType(idSteps, frequency: .Immediate, withCompletion: {(success, error) -> Void in
+    self.healthStore.enableBackgroundDelivery(for: idSteps!, frequency: .immediate, withCompletion: {(success, error) -> Void in
       
       if success {
-        println("Enabled background delivery of steps increase")
+        print("Enabled background delivery of steps increase")
         //                            self.healthStore.executeQuery(self.obQuery)
         
       }
       else{
         if let theError = error {
           print("Failed to enable background delivery of weight changes")
-          println("Error = \(theError)")
+          print("Error = \(theError)")
         }
       }
     })
   }
   
   func stopObservingChanges(){
-    healthStore.stopQuery(obQuery)
+    healthStore.stop(obQuery!)
     
-    healthStore.disableAllBackgroundDeliveryWithCompletion({(succeeded:Bool, error: NSError!) in
+    healthStore.disableAllBackgroundDelivery(completion: {(succeeded:Bool, error: NSError!) in
       if succeeded {
-        println("Disabled background delivery of step count increase")
+        print("Disabled background delivery of step count increase")
       }
       else{
         if let theError = error{
-          println("Failed to disable background delivery of steps")
-          println("Error = \(theError)")
+          print("Failed to disable background delivery of steps")
+          print("Error = \(theError)")
         }
       }
-    })
+    } as! (Bool, Error?) -> Void)
   }
   
 }
 
 protocol CountDelegate{
   
-  func countUpdated(newCount:Int);
+  func countUpdated(_ newCount:Int);
   
 }
