@@ -8,7 +8,7 @@
 
 import WatchKit
 import Foundation
-
+import UserNotifications
 
 class InterfaceController: WKInterfaceController {
 
@@ -39,21 +39,6 @@ class InterfaceController: WKInterfaceController {
     override func didDeactivate() {
         // This method is called when watch view controller is no longer visible
         super.didDeactivate()
-    }
-
-    override func handleAction(withIdentifier identifier: String?, for localNotification: UILocalNotification) {
-        if identifier == "outraTela" {
-            self.pushController(withName: "outraTela", context: nil)
-        }
-    }
-    
-
-    override func handleAction(withIdentifier identifier: String?, forRemoteNotification remoteNotification: [AnyHashable : Any]) {
-        
-        if identifier == "outraTela" {
-            self.pushController(withName: "outraTela", context: nil)
-        }
-        
     }
     
 

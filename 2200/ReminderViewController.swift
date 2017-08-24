@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import UserNotifications
 
 class ReminderViewController: UIViewController {
 
@@ -24,7 +25,8 @@ class ReminderViewController: UIViewController {
       }
       else{
         
-        UIApplication.shared.cancelAllLocalNotifications()
+        UNUserNotificationCenter.current().removeAllPendingNotificationRequests()
+        
       
       }
     }
@@ -40,7 +42,7 @@ class ReminderViewController: UIViewController {
         
         // código para enviar uma notificação local
         // UIApplication.sharedApplication().cancelAllLocalNotifications()
-        UIApplication.shared.cancelAllLocalNotifications();
+        UNUserNotificationCenter.current().removeAllPendingNotificationRequests()
         
         let selectedDate = datePicker.date;
         

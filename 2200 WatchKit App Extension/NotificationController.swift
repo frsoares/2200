@@ -37,7 +37,7 @@ class NotificationController: WKUserNotificationInterfaceController {
         
         let inf = notification.request.content.userInfo
         
-        print(inf["customKey"])
+        print(inf["customKey"] ?? "" )
         
         // This method is called when a notification needs to be presented.
         // Implement it if you use a dynamic notification interface.
