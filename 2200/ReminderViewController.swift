@@ -20,7 +20,7 @@ class ReminderViewController: UIViewController {
       
       if reminderSwitch.isOn {
       
-        datePickerValueChanged(reminderSwitch);
+        datePickerAction(reminderSwitch);
         
       }
       else{
@@ -41,19 +41,23 @@ class ReminderViewController: UIViewController {
       if reminderSwitch.isOn{
         
         // código para enviar uma notificação local
-        // UIApplication.sharedApplication().cancelAllLocalNotifications()
+        
         UNUserNotificationCenter.current().removeAllPendingNotificationRequests()
         
         let selectedDate = datePicker.date;
         
-        let note = UILocalNotification()
+        let content = UNMutableNotificationContent()
         
-        note.alertBody = "Hey! Just to remind you of walking your 10000 steps today! Check out how much you've walked already!"
-        note.fireDate = selectedDate;
+        content.body = "Hey! Just to remind you of walking your 10000 steps today! Check out how much you've walked already!"
         
-        note.repeatInterval = NSCalendar.Unit.day
+        let components = Calendar.current.dateComponents([.hour, .minute], from: selectedDate)
         
-        UIApplication.shared.scheduleLocalNotification(note);
+        let trigger = UNCalendarNotificationTrigger(dateMatching: components, repeats: true)
+        
+        let request = UNNotificationRequest(identifier: UUID().uuidString, content: content, trigger: trigger)
+        
+        UNUserNotificationCenter.current().add(request)
+
         // fim do código de notificação
         
       }
@@ -83,23 +87,6 @@ class ReminderViewController: UIViewController {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
-    
-  @IBAction func datePickerValueChanged(_ sender:AnyObject){
-    
-    UIApplication.shared.cancelAllLocalNotifications();
-    
-    let selectedDate = datePicker.date;
-    
-    let note = UILocalNotification()
-    
-    note.alertBody = ""
-    note.fireDate = selectedDate;
-    
-    note.repeatInterval = NSCalendar.Unit.day
-    
-    UIApplication.shared.scheduleLocalNotification(note);
-    
-  }
   
 
 }

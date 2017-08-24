@@ -8,6 +8,7 @@
 
 import UIKit
 import HealthKit
+import UserNotifications
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -20,12 +21,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions:  [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
-
-        if application.responds(to: #selector(UIApplication.registerUserNotificationSettings(_:))){
-        
-          let set = UIUserNotificationSettings(types: .alert, categories: nil);
-          application.registerUserNotificationSettings(set);
-        }
       
         //UITabBar.appearance().tintColor = UIColor(red: CGFloat(84.0/255.0), green: CGFloat(174.0/255.0), blue: CGFloat(58.0/255.0), alpha: CGFloat(1.0))
         return true
