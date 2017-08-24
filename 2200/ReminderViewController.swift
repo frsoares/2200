@@ -37,6 +37,9 @@ class ReminderViewController: UIViewController {
       
       
       if reminderSwitch.isOn{
+        
+        // código para enviar uma notificação local
+        // UIApplication.sharedApplication().cancelAllLocalNotifications()
         UIApplication.shared.cancelAllLocalNotifications();
         
         let selectedDate = datePicker.date;
@@ -49,10 +52,13 @@ class ReminderViewController: UIViewController {
         note.repeatInterval = NSCalendar.Unit.day
         
         UIApplication.shared.scheduleLocalNotification(note);
-
+        // fim do código de notificação
+        
       }
     }
 
+    
+    
     var hourArray = [String]()
 
 

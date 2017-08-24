@@ -83,7 +83,7 @@ class HistoryTableViewController: UIViewController, UITableViewDelegate, UITable
           
         }
         
-        
+        items.reverse()
         
         DispatchQueue.main.async {
             self.historyTable.reloadData();
