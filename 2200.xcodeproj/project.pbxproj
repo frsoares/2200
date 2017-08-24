@@ -207,6 +207,7 @@
 				TargetAttributes = {
 					1F843F861A81302500E1DFEA = {
 						CreatedOnToolsVersion = 6.1.1;
+						DevelopmentTeam = 3AMBC8TS93;
 						LastSwiftMigration = 0800;
 						SystemCapabilities = {
 							com.apple.HealthKit = {
@@ -401,7 +402,7 @@
 				CODE_SIGN_ENTITLEMENTS = 2200/2200.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = 3AMBC8TS93;
 				INFOPLIST_FILE = 2200/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -420,7 +421,7 @@
 				CODE_SIGN_ENTITLEMENTS = 2200/2200.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = 3AMBC8TS93;
 				INFOPLIST_FILE = 2200/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
