@@ -10,7 +10,7 @@ import UIKit
 import HealthKit
 import UserNotifications
 
-@UIApplicationMain
+@main
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
@@ -18,13 +18,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var healthStore : HKHealthStore = HKHealthStore()
   
     var task : UIBackgroundTaskIdentifier?
-    
-    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions:  [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-        // Override point for customization after application launch.
-      
-        //UITabBar.appearance().tintColor = UIColor(red: CGFloat(84.0/255.0), green: CGFloat(174.0/255.0), blue: CGFloat(58.0/255.0), alpha: CGFloat(1.0))
-        return true
-    }
+
+//    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions:  [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
+//        // Override point for customization after application launch.
+//      
+//        //UITabBar.appearance().tintColor = UIColor(red: CGFloat(84.0/255.0), green: CGFloat(174.0/255.0), blue: CGFloat(58.0/255.0), alpha: CGFloat(1.0))
+//        return true
+//    }
 
     func applicationWillResignActive(_ application: UIApplication) {
         // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
@@ -42,14 +42,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             print("boo")
         }
         
-        DispatchQueue.main.async {
-            
-            
-            
-            
-        }
-        
-        
     }
 
     func applicationWillEnterForeground(_ application: UIApplication) {
@@ -58,7 +50,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         guard let task = self.task else { return; }
         
         application.endBackgroundTask(task)
-        self.task = UIBackgroundTaskInvalid
+        self.task = UIBackgroundTaskIdentifier.invalid
         
         
     }

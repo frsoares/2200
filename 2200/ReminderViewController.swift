@@ -77,11 +77,7 @@ class ReminderViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-
-       datePicker.datePickerMode = UIDatePickerMode.time;
-      
-      
+        datePicker.datePickerMode = UIDatePicker.Mode.time
     }
 
     override func didReceiveMemoryWarning() {

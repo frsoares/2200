@@ -80,7 +80,7 @@ class StepCounter {
                 
                 let unit = HKUnit(from: "count")
                 
-                for quantitySample : HKQuantitySample in results as! [HKQuantitySample]! {
+                for quantitySample : HKQuantitySample in results as! [HKQuantitySample] {
                     let quantity = quantitySample.quantity
                     sum = sum + Int(quantity.doubleValue(for: unit))
                 }

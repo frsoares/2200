@@ -113,9 +113,8 @@ class HistoryTableViewController: UIViewController, UITableViewDelegate, UITable
         return items.count
     }
     
-    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell{
-        let cell:UITableViewCell = UITableViewCell(style: UITableViewCellStyle.subtitle, reuseIdentifier: "historyCell")
+        let cell:UITableViewCell = UITableViewCell(style: UITableViewCell.CellStyle.subtitle, reuseIdentifier: "historyCell")
         cell.textLabel?.text = "\(items[indexPath.row].1)"
         cell.detailTextLabel?.text = "\(items[indexPath.row].0)"
         return cell
